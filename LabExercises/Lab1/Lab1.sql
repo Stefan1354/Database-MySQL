@@ -5,7 +5,7 @@ USE sportClubs;
 CREATE TABLE students (
 id INT auto_increment PRIMARY KEY, 
 studentName VARCHAR(255) NOT NULL,
-fNum CHAR(10) NOT NULL unique,
+fNum CHAR(10) NOT NULL UNIQUE,
 phone VARCHAR(50) NULL
 );
 
