@@ -36,7 +36,3 @@ CONSTRAINT FOREIGN KEY(student_id) REFERENCES students(id),
 CONSTRAINT FOREIGN KEY(group_id) REFERENCES sportGroups(id),
 PRIMARY KEY(student_id, group_id)
 );
-
-
-
-
