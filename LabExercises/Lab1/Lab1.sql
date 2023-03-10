@@ -12,7 +12,7 @@ phone VARCHAR(50) NULL
 CREATE TABLE coaches (
 id INT auto_increment PRIMARY KEY, 
 coachName VARCHAR(255) NOT NULL,
-egn CHAR(10) NOT NULL unique
+egn CHAR(10) NOT NULL UNIQUE
 );
 
 CREATE TABLE clubs (
