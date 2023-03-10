@@ -3,18 +3,21 @@ CREATE DATABASE sportClubs;
 USE sportClubs;
 
 CREATE TABLE students (
-id INT auto_increment PRIMARY KEY, studentName VARCHAR(255) NOT NULL,
+id INT auto_increment PRIMARY KEY, 
+studentName VARCHAR(255) NOT NULL,
 fNum CHAR(10) NOT NULL unique,
 phone VARCHAR(50) NULL
 );
 
 CREATE TABLE coaches (
-id INT auto_increment PRIMARY KEY, coachName VARCHAR(255) NOT NULL,
+id INT auto_increment PRIMARY KEY, 
+coachName VARCHAR(255) NOT NULL,
 egn CHAR(10) NOT NULL unique
 );
 
 CREATE TABLE clubs (
-id INT auto_increment PRIMARY KEY, sportName VARCHAR(255) NOT NULL
+id INT auto_increment PRIMARY KEY, 
+sportName VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE sportGroups(
