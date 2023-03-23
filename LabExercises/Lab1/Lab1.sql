@@ -27,15 +27,15 @@ hourOfDay TIME NOT NULL,
 place VARCHAR(255) NOT NULL,
 club_id INT NOT NULL,
 coach_id INT NOT NULL,
-CONSTRAINT FOREIGN KEY(club_id) REFERENCES clubs(id),
-CONSTRAINT FOREIGN KEY(coach_id) REFERENCES coaches(id),
+CONSTRAINT FOREIGN KEY (club_id) REFERENCES clubs(id),
+CONSTRAINT FOREIGN KEY (coach_id) REFERENCES coaches(id),
 unique KEY(dayOfWeek, hourOfDay, place)
 );
 
 CREATE TABLE student_group(
 student_id INT NOT NULL,
 group_id INT NOT NULL,
-CONSTRAINT FOREIGN KEY(student_id) REFERENCES students(id),
-CONSTRAINT FOREIGN KEY(group_id) REFERENCES sportGroups(id),
+CONSTRAINT FOREIGN KEY (student_id) REFERENCES students(id),
+CONSTRAINT FOREIGN KEY (group_id) REFERENCES sportGroups(id),
 PRIMARY KEY(student_id, group_id)
 );
