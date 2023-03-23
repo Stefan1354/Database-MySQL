@@ -21,8 +21,8 @@ text VARCHAR(3000) NOT NULL,
 link VARCHAR(255) NOT NULL unique,
 author_id INT NOT NULL,
 category_id INT NOT NULL,
-CONSTRAINT FOREIGN KEY (author_id) REFERENCES users (id),
-CONSTRAINT FOREIGN KEY (category_id) REFERENCES categories (id)
+CONSTRAINT FOREIGN KEY (author_id) REFERENCES users(id),
+CONSTRAINT FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
 
@@ -37,6 +37,14 @@ CREATE TABLE article_multimedia(
 article_id INT NOT NULL,
 multimedia_id INT NOT NULL,
 PRIMARY KEY(article_id, multimedia_id),
-CONSTRAINT FOREIGN KEY(article_id) REFERENCES articles (id),
-CONSTRAINT FOREIGN KEY(multimedia_id) REFERENCES multimedia (id)
+CONSTRAINT FOREIGN KEY (article_id) REFERENCES articles(id),
+CONSTRAINT FOREIGN KEY (multimedia_id) REFERENCES multimedia(id)
+);
+
+CREATE TABLE comments(
+id INT AUTO_INCREMENT PRIMARY KEY,
+text TEXT NOT NULL,
+date DATETIME NOT NULL,
+user_id INT NOT NULL,
+CONSTRAINT FOREIGN KEY (user_id) REFERENCES users(id)
 );
