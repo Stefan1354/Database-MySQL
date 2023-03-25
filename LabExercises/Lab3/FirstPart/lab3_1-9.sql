@@ -2,18 +2,18 @@ DROP DATABASE IF EXISTS school_sport_clubs;
 CREATE DATABASE school_sport_clubs;
 USE school_sport_clubs;
 
-CREATE TABLE school_sport_clubs.sports(
+CREATE TABLE school_sport_clubs.sports (
 	id INT AUTO_INCREMENT PRIMARY KEY ,
 	name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE school_sport_clubs.coaches(
+CREATE TABLE school_sport_clubs.coaches (
 	id INT AUTO_INCREMENT PRIMARY KEY ,
 	name VARCHAR(255) NOT NULL ,
 	egn VARCHAR(10) NOT NULL UNIQUE
 );
 
-CREATE TABLE school_sport_clubs.students(
+CREATE TABLE school_sport_clubs.students (
 	id INT AUTO_INCREMENT PRIMARY KEY ,
 	name VARCHAR(255) NOT NULL ,
 	egn VARCHAR(10) NOT NULL UNIQUE ,
@@ -22,7 +22,7 @@ CREATE TABLE school_sport_clubs.students(
 	class VARCHAR(10) NULL DEFAULT NULL   
 );
 
-CREATE TABLE school_sport_clubs.sportGroups(
+CREATE TABLE school_sport_clubs.sportGroups (
 	id INT AUTO_INCREMENT PRIMARY KEY ,
 	location VARCHAR(255) NOT NULL ,
 	dayOfWeek ENUM('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') ,
@@ -36,7 +36,7 @@ CREATE TABLE school_sport_clubs.sportGroups(
 		REFERENCES coaches(id)
 );
 
-CREATE TABLE school_sport_clubs.student_sport(
+CREATE TABLE school_sport_clubs.student_sport (
 	student_id INT NOT NULL , 
 	sportGroup_id INT NOT NULL ,  
 	CONSTRAINT FOREIGN KEY (student_id) 
