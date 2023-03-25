@@ -31,18 +31,18 @@ CREATE TABLE school_sport_clubs.sportGroups (
 	coach_id INT NULL ,
 	UNIQUE KEY(location,dayOfWeek,hourOfTraining),
 	CONSTRAINT FOREIGN KEY(sport_id) 
-		REFERENCES sports(id),
+	REFERENCES sports(id),
 	CONSTRAINT FOREIGN KEY (coach_id) 
-		REFERENCES coaches(id)
+	REFERENCES coaches(id)
 );
 
 CREATE TABLE school_sport_clubs.student_sport (
 	student_id INT NOT NULL , 
 	sportGroup_id INT NOT NULL ,  
 	CONSTRAINT FOREIGN KEY (student_id) 
-		REFERENCES students(id),	
+	REFERENCES students(id),	
 	CONSTRAINT FOREIGN KEY (sportGroup_id) 
-		REFERENCES sportGroups(id),
+	REFERENCES sportGroups(id),
 	PRIMARY KEY(student_id,sportGroup_id)
 );
 
