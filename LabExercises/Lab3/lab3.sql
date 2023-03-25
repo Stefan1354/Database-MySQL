@@ -72,7 +72,7 @@ JOIN sportGroups ON student_sport.sportGroup_id = sportGroups.id
 WHERE sportGroups.dayOfWeek = 'Monday';
 
 #6
-SELECT DISTINCT coaches.name
+SELECT coaches.name
 FROM coaches
 JOIN sportGroups ON sportGroups.coach_id = coaches.id
 JOIN sports ON sportGroups.sport_id = sports.id
