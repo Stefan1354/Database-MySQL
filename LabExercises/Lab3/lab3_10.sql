@@ -5,7 +5,7 @@ USE car_service;
 CREATE TABLE service (
 id INT AUTO_INCREMENT PRIMARY KEY,
 type ENUM ('Vehicle diagnostics', 
-		   'Oil and filter change', 
+           'Oil and filter change', 
            'Tire change', 
            'Repair of air conditioning systems', 
            'Gearbox repair'),
