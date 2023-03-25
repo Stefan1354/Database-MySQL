@@ -5,7 +5,7 @@ USE car_service;
 CREATE TABLE service (
 id INT AUTO_INCREMENT PRIMARY KEY,
 type ENUM ('Vehicle diagnostics', 
-	   'Oil and filter change', 
+		   'Oil and filter change', 
            'Tire change', 
            'Repair of air conditioning systems', 
            'Gearbox repair'),
@@ -16,7 +16,7 @@ duration INT NOT NULL
 CREATE TABLE employees (
 id INT AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(255) NOT NULL,
-workExperience YEAR NOT NULL,
+workExperience INT NOT NULL,
 phone VARCHAR(20) NOT NULL
 );
 
