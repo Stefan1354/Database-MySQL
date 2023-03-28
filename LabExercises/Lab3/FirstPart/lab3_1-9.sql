@@ -47,41 +47,41 @@ CREATE TABLE school_sport_clubs.student_sport(
 );
 
 INSERT INTO sports
-VALUES 	(NULL, 'Football') ,
-	(NULL, 'Volleyball') ,
-	(NULL, 'Tennis');
+VALUES (NULL, 'Football') ,
+       (NULL, 'Volleyball') ,
+       (NULL, 'Tennis');
 		
 INSERT INTO coaches  
-VALUES 	(NULL, 'Ivan Todorov Petkov', '7509041245') ,
-	(NULL, 'Georgi Ivanov Todorov', '8010091245') ,
-	(NULL, 'Ilian Todorov Georgiev', '8407106352') ,
-	(NULL, 'Petar Slavkov Yordanov', '7010102045') ,
-	(NULL, 'Todor Ivanov Ivanov', '8302160980') , 
-	(NULL, 'Slavi Petkov Petkov', '7106041278');
+VALUES (NULL, 'Ivan Todorov Petkov', '7509041245') ,
+       (NULL, 'Georgi Ivanov Todorov', '8010091245') ,
+       (NULL, 'Ilian Todorov Georgiev', '8407106352') ,
+       (NULL, 'Petar Slavkov Yordanov', '7010102045') ,
+       (NULL, 'Todor Ivanov Ivanov', '8302160980') , 
+       (NULL, 'Slavi Petkov Petkov', '7106041278');
 		
 INSERT INTO students (name, egn, address, phone, class) 
-VALUES 	('Iliyan Ivanov', '9401150045', 'Sofia-Mladost 1', '0893452120', '10') ,
-	('Ivan Iliev Georgiev', '9510104512', 'Sofia-Liylin', '0894123456', '11') ,
-	('Elena Petrova Petrova', '9505052154', 'Sofia-Mladost 3', '0897852412', '11') ,
-	('Ivan Iliev Iliev', '9510104542', 'Sofia-Mladost 3', '0894123457', '11') ,
-	('Maria Hristova Dimova', '9510104547', 'Sofia-Mladost 4', '0894123442', '11') ,
-	('Antoaneta Ivanova Georgieva', '9411104547', 'Sofia-Krasno selo', '0874526235', '10');
+VALUES ('Iliyan Ivanov', '9401150045', 'Sofia-Mladost 1', '0893452120', '10') ,
+       ('Ivan Iliev Georgiev', '9510104512', 'Sofia-Liylin', '0894123456', '11') ,
+       ('Elena Petrova Petrova', '9505052154', 'Sofia-Mladost 3', '0897852412', '11') ,
+       ('Ivan Iliev Iliev', '9510104542', 'Sofia-Mladost 3', '0894123457', '11') ,
+       ('Maria Hristova Dimova', '9510104547', 'Sofia-Mladost 4', '0894123442', '11') ,
+       ('Antoaneta Ivanova Georgieva', '9411104547', 'Sofia-Krasno selo', '0874526235', '10');
 		
 INSERT INTO sportGroups
-VALUES 	(NULL, 'Sofia-Mladost 1', 'Monday', '08:00:00', 1, 1 ) ,
-	(NULL, 'Sofia-Mladost 1', 'Monday', '09:30:00', 2, 1 ) ,
-	(NULL, 'Sofia-Liylin 7', 'Sunday', '09:00:00', 2, 2) ,
-        (NULL, 'Sofia-Liylin 3', 'Tuesday', '09:00:00', 2, 2) ,
-	(NULL, 'Sofia-Liylin 3', 'Friday', '09:00:00', NULL, NULL) ,
-	(NULL, 'Sofia-Nadezhda', 'Sunday', '08:00:00', 1, NULL);
+VALUES (NULL, 'Sofia-Mladost 1', 'Monday', '08:00:00', 1, 1 ) ,
+       (NULL, 'Sofia-Mladost 1', 'Monday', '09:30:00', 2, 1 ) ,
+       (NULL, 'Sofia-Liylin 7', 'Sunday', '09:00:00', 2, 2) ,
+       (NULL, 'Sofia-Liylin 3', 'Tuesday', '09:00:00', 2, 2) ,
+       (NULL, 'Sofia-Liylin 3', 'Friday', '09:00:00', NULL, NULL) ,
+       (NULL, 'Sofia-Nadezhda', 'Sunday', '08:00:00', 1, NULL);
 		
 INSERT INTO student_sport 
-VALUES 	(1, 1),
-	(2, 1),
-	(3, 1),
-	(4, 2),
-	(5, 2),
-	(6, 2);
+VALUES (1, 1),
+       (2, 1),
+       (3, 1),
+       (4, 2),
+       (5, 2),
+       (6, 2);
 
 #1
 INSERT INTO students (name, egn, address, class, phone)
