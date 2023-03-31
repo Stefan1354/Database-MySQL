@@ -248,3 +248,30 @@ VALUES	(NULL, '1', '1', '200', '1', 2022, now()),
 	(NULL, '1', '2', '200', '3', 2020, now()),
 	(NULL, '4', '2', '200', '1', 2020, now()),
 	(NULL, '4', '2', '200', '2', 2020, now());
+	
+#4
+SELECT s1.name AS student1, s2.name AS student2, sp.name AS sportName, sg.location, sg.dayOfWeek, sg.hourOfTraining
+FROM students s1
+JOIN student_sport ss1 ON s1.id = ss1.student_id
+JOIN sportGroups sg ON ss1.sportGroup_id = sg.id
+JOIN sports sp ON sg.sport_id = sp.id
+JOIN student_sport ss2 ON ss1.sportGroup_id = ss2.sportGroup_id AND ss1.student_id < ss2.student_id
+JOIN students s2 ON s2.id = ss2.student_id AND sp.name = 'Football';
+
+#5
+CREATE VIEWS tables
+AS
+SELECT students.name, students.class, sportgroups.location, coaches.name
+FROM students JOIN student_sport ON students.id = student_sport.student_id
+JOIN sportgroups ON student_sport.sportGroup_id = sportgroups.id
+JOIN sports ON sportgroups.sport_id = sports.id
+JOIN coaches ON sportgroups.coach_id = coaches.id
+WHERE sporrgroups.hourOfTraining = '08:00:00';
+
+
+#6
+SELECT sports.name, COUNT(students.id) AS numberOfStudents
+FROM sports JOIN sportgroups ON sports.id = sportgroups.sport_id
+JOIN student_sport ON student_sport.sportGroup_id = sportgroups.id
+JOIN students ON student_sport.student_id = students.id
+GROUP BY sports.name;
