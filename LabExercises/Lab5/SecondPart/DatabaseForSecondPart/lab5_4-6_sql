@@ -270,7 +270,7 @@ JOIN coaches ON sportgroups.coach_id = coaches.id
 WHERE sporrgroups.hourOfTraining = '08:00:00';
 
 #6
-/*SELECT sports.name, COUNT(students.id) AS numberOfStudents
+SELECT sports.name, COUNT(students.id) AS numberOfStudents
 FROM sports JOIN sportgroups ON sports.id = sportgroups.sport_id
 JOIN student_sport ON student_sport.sportGroup_id = sportgroups.id
 JOIN students ON student_sport.student_id = students.id
