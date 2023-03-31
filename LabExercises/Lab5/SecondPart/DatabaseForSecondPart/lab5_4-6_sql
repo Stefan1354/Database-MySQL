@@ -249,70 +249,18 @@ VALUES	(NULL, '1', '1', '200', '1', 2022, now()),
 		(NULL, '4', '2', '200', '1', 2020, now()),
 		(NULL, '4', '2', '200', '2', 2020, now());
 
-/*CREATE VIEW sportLocation(sport, place) /* davame imena na kolonite v rezultantnata tablica (trqbva da e ednakuv na broq tablici v JOIN-ovete*/
-/*AS
-SELECT sports.name, sportGroups.location
-from sports JOIN sportGroups
-ON sports.id = sportGroups.sport_id;   /* */
-
-/* VIEW - Virtualna tablica, kogato pishem INSERT zaqvki, dobavqme stoinosti i za stoinostite v tablicite, koito sa NULL*/
-/* VIEW shte ima na kontrolnoto */
-
-/*SELECT * FROM sportLocation; /* sushtoto kato ot red 252 do 256*/
-
-/*DROP VIEW sportLocation;  /* iztrivane na VIEW */
-
-/* Agregatni funkcii*/
-/* MIN()  ; MAX()  ;  SUM()  ; AVG()  ;  COUNT()  ;*/
-
-/*SELECT count(coach_id) from sportGroups; /* */
-
-/*SELECT count (*) from sportGroups;*/
-
-/*SELECT group_id, sum(paymentAmount)
-FROM taxesPayments
-WHERE group_id = 1;*/
-
-/*SELECT group_id, sum(paymentAmount)
-FROM taxesPayments
-group by group_id;*/
-/* prilagame agregatnata funkciq vurhu otdelni chasti ot nqkoq kolona, zavisi ot stoinostite vutre; mojem poveche koloni*/
-
-/*SELECT group_id, sum(paymentAmount)
-FROM taxesPayments
-GROUP BY group_id;*/
-/*having sum(paymentAmount) > 11000;  printira 18150 v tablicata*/
-/*WHERE sum(paymentAmount) > 1100;    ne mojem tuka da izpolzvame WHERE*/
-
-
-/* group by i having na kontrolnoto*/
-
-
-/*#zadacha 5*/
-/*
-CREATE VIEW sp (Student_name, Class, Location, Coach_name)
-AS
-SELECT students.name, students.class, sportGroups.location, coaches.name FROM students JOIN student_sport ON 
-students.id=student_sport.student_id JOIN sportGroups ON 
-student_sport.sportGroup_id=sportGroups.id JOIN coaches ON
-sportGroups.coach_id=coaches.id 
-WHERE sportGroups.hourOfTraining = '08:00:00';
-
-SELECT * FROM sp;
-*/
-
 
 #4
-/*SELECT s1.name AS student1, s2.name AS student2, sp.name AS sportName, sg.location, sg.dayOfWeek, sg.hourOfTraining
+SELECT s1.name AS student1, s2.name AS student2, sp.name AS sportName, sg.location, sg.dayOfWeek, sg.hourOfTraining
 FROM students s1
 JOIN student_sport ss1 ON s1.id = ss1.student_id
 JOIN sportGroups sg ON ss1.sportGroup_id = sg.id
 JOIN sports sp ON sg.sport_id = sp.id
 JOIN student_sport ss2 ON ss1.sportGroup_id = ss2.sportGroup_id AND ss1.student_id < ss2.student_id
-JOIN students s2 ON s2.id = ss2.student_id AND sp.name = 'Football';*/
+JOIN students s2 ON s2.id = ss2.student_id AND sp.name = 'Football';
 
 #5
-/*CREATE VIEWS tables
+CREATE VIEWS tables
 AS
 SELECT students.name, students.class, sportgroups.location, coaches.name
 FROM students JOIN student_sport ON students.id = student_sport.student_id
@@ -320,10 +268,10 @@ JOIN sportgroups ON student_sport.sportGroup_id = sportgroups.id
 JOIN sports ON sportgroups.sport_id = sports.id
 JOIN coaches ON sportgroups.coach_id = coaches.id
 WHERE sporrgroups.hourOfTraining = '08:00:00';
-*/
+
 #6
 /*SELECT sports.name, COUNT(students.id) AS numberOfStudents
 FROM sports JOIN sportgroups ON sports.id = sportgroups.sport_id
 JOIN student_sport ON student_sport.sportGroup_id = sportgroups.id
 JOIN students ON student_sport.student_id = students.id
-GROUP BY sports.name;*/
+GROUP BY sports.name;
