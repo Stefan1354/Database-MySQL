@@ -251,76 +251,54 @@ VALUES	(NULL, '1', '1', '200', '1', 2022, now()),
         
         
 #1
-/*SELECT students.name, students.class, students.phone
+SELECT students.name, students.class, students.phone
 FROM students JOIN student_sport ON students.id = student_sport.student_id
 JOIN sportgroups ON student_sport.sportGroup_id = sportgroups.id
 JOIN sports ON sportgroups.sport_id = sports.id
-WHERE sports.name = 'Football';*/
+WHERE sports.name = 'Football';
 
 #2
-/*SELECT coaches.name
+SELECT coaches.name
 FROM coaches JOIN sportgroups ON
 coaches.id = sportgroups.coach_id
 JOIN sports ON sportgroups.sport_id = sports.id
-WHERE sports.name = 'Volleyball';*/
+WHERE sports.name = 'Volleyball';
 
 #3
-/*SELECT coaches.name, sports.name, sportgroups.dayOfWeek, sportgroups.location
+SELECT coaches.name, sports.name, sportgroups.dayOfWeek, sportgroups.location
 FROM coaches JOIN sportgroups ON coaches.id = sportgroups.coach_id
 JOIN sports ON sportgroups.sport_id = sports.id
 JOIN student_sport ON sportgroups.id = student_sport.sportGroup_id
 JOIN students ON students.id = student_sport.student_id
-WHERE students.name = 'Maria Hristova Dimova';*/
+WHERE students.name = 'Maria Hristova Dimova';
 
 #4
-/*SELECT students.id, students.name, SUM(taxespayments.paymentAmount) AS sumTaxes,
+SELECT students.id, students.name, SUM(taxespayments.paymentAmount) AS sumTaxes,
 taxespayments.month AS month
 FROM students JOIN taxespayments ON students.id = taxespayments.student_id
 JOIN sportgroups ON taxespayments.group_id = sportgroups.id
 JOIN coaches ON sportgroups.coach_id = coaches.id
 WHERE coaches.egn = '7509041245'
 GROUP BY student_id, month
-HAVING sumTaxes > 250;*/
+HAVING sumTaxes > 250;
 
 #5
-/*SELECT COUNT(students.id)
+SELECT COUNT(students.id)
 FROM students JOIN student_sport ON students.id = student_sport.student_id
 JOIN sportgroups ON student_sport.sportGroup_id = sportgroups.id
 JOIN sports ON sportgroups.sport_id = sports.id
-WHERE sports.name = 'Football';*/
+WHERE sports.name = 'Football';
 
 #6
-/*SELECT coaches.name, sports.name AS sportName
+SELECT coaches.name, sports.name AS sportName
 FROM coaches LEFT JOIN sportgroups ON 
 coaches.id = sportgroups.coach_id
-LEFT JOIN sports ON sportgroups.sport_id = sports.id;*/
+LEFT JOIN sports ON sportgroups.sport_id = sports.id;
 
 #7
-/*SELECT sports.name, sportgroups.location, COUNT(students.id) AS numOfStudents
+SELECT sports.name, sportgroups.location, COUNT(students.id) AS numOfStudents
 FROM sports JOIN sportgroups ON sports.id = sportgroups.sport_id
 JOIN student_sport ON sportgroups.id = student_sport.sportGroup_id
 JOIN students ON students.id = student_sport.student_id
 GROUP BY sports.name, sportgroups.location
-HAVING numOfStudents > 3;*/
-
-#8
-/*USE transaction_test;
-BEGIN;
-SELECT id, amount 
-FROM customer_accounts 
-WHERE currency = 'BGN' 
-    AND customer_id = (SELECT id FROM customers WHERE name = 'Stoyan Pavlov Pavlov') 
-FOR UPDATE;
-
-
-UPDATE customer_accounts 
-SET amount = amount - 50000 
-WHERE currency = 'BGN' 
-    AND customer_id = (SELECT id FROM customers WHERE name = 'Stoyan Pavlov Pavlov');
-
-UPDATE customer_accounts 
-SET amount = amount + 50000 
-WHERE currency = 'BGN' 
-    AND customer_id = (SELECT id FROM customers WHERE name = 'Ivan Petrov Iordanov');
-
-COMMIT;*/
+HAVING numOfStudents > 3;
