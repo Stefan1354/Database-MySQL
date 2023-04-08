@@ -43,18 +43,18 @@ BEGIN;
 SELECT id, amount 
 FROM customer_accounts 
 WHERE currency = 'BGN' 
-    AND customer_id = (SELECT id FROM customers WHERE name = 'Stoyan Pavlov Pavlov') 
+AND customer_id = (SELECT id FROM customers WHERE name = 'Stoyan Pavlov Pavlov') 
 FOR UPDATE;
 
 
 UPDATE customer_accounts 
 SET amount = amount - 50000 
 WHERE currency = 'BGN' 
-    AND customer_id = (SELECT id FROM customers WHERE name = 'Stoyan Pavlov Pavlov');
+AND customer_id = (SELECT id FROM customers WHERE name = 'Stoyan Pavlov Pavlov');
 
 UPDATE customer_accounts 
 SET amount = amount + 50000 
 WHERE currency = 'BGN' 
-    AND customer_id = (SELECT id FROM customers WHERE name = 'Ivan Petrov Iordanov');
+AND customer_id = (SELECT id FROM customers WHERE name = 'Ivan Petrov Iordanov');
 
 COMMIT;
