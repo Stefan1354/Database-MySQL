@@ -31,18 +31,18 @@ CREATE TABLE school_sport_clubs.sportGroups(
 	coach_id INT NULL ,
 	UNIQUE KEY(location,dayOfWeek,hourOfTraining)  ,
 	CONSTRAINT FOREIGN KEY(sport_id) 
-		REFERENCES sports(id) ,
+	REFERENCES sports(id) ,
 	CONSTRAINT FOREIGN KEY (coach_id) 
-		REFERENCES coaches(id)
+	REFERENCES coaches(id)
 );
 
 CREATE TABLE school_sport_clubs.student_sport(
 	student_id INT NOT NULL , 
 	sportGroup_id INT NOT NULL ,  
 	CONSTRAINT FOREIGN KEY (student_id) 
-		REFERENCES students(id) ,	
+	REFERENCES students(id) ,	
 	CONSTRAINT FOREIGN KEY (sportGroup_id) 
-		REFERENCES sportGroups(id) ,
+	REFERENCES sportGroups(id) ,
 	PRIMARY KEY(student_id,sportGroup_id)
 );
 
@@ -55,9 +55,9 @@ CREATE TABLE taxesPayments(
 	year YEAR,
 	dateOfPayment DATETIME NOT NULL ,
 	CONSTRAINT FOREIGN KEY (student_id) 
-		REFERENCES students(id),
+	REFERENCES students(id),
 	CONSTRAINT FOREIGN KEY (group_id) 
-		REFERENCES sportgroups(id)
+	REFERENCES sportgroups(id)
 );
 
 CREATE TABLE salaryPayments(
@@ -68,7 +68,7 @@ CREATE TABLE salaryPayments(
 	salaryAmount double,
 	dateOfPayment datetime not null,
 	CONSTRAINT FOREIGN KEY (coach_id) 
-		REFERENCES coaches(id),
+	REFERENCES coaches(id),
 	UNIQUE KEY(`coach_id`,`month`,`year`)
 );
 
@@ -250,7 +250,7 @@ VALUES	(NULL, '1', '1', '200', '1', 2022, now()),
 		(NULL, '4', '2', '200', '2', 2020, now());
 
 #1
-/*DELIMITER |
+DELIMITER |
 DROP procedure IF EXISTS zadacha1 |
 CREATE procedure zadacha1(IN coachName VARCHAR (255))
 BEGIN
@@ -266,11 +266,11 @@ END;
 |
 DELIMITER ;
 
-CALL zadacha1('Ivan Todorov Petkov');*/
+CALL zadacha1('Ivan Todorov Petkov');
 
 
 #2
-/*delimiter |
+delimiter |
 DROP procedure IF EXISTS zadacha2 |
 CREATE procedure zadacha2(IN sportId INT)
 BEGIN
@@ -285,11 +285,11 @@ END;
 |
 DELIMITER ;
  
-CALL zadacha2(1);*/
+CALL zadacha2(1);
 
 
 #3
-/*DELIMITER |
+DELIMITER |
 DROP procedure IF EXISTS zadacha3 |
 CREATE procedure zadacha3(IN studentName VARCHAR(255), inYear YEAR)
 BEGIN
@@ -301,11 +301,11 @@ AND inYear = taxespayments.year;
 END;
 |
 DELIMITER ;
-CALL zadacha3('Iliyan Ivanov',2022);*/
+CALL zadacha3('Iliyan Ivanov',2022);
 
 
 #4
-/*delimiter |
+delimiter |
 DROP procedure IF EXISTS zadacha4 |
 CREATE procedure zadacha4(IN coachName VARCHAR(255))
 BEGIN
@@ -324,4 +324,4 @@ END;
 |
 DELIMITER ;
  
-CALL zadacha4('Ivan Todorov Petkov');*/
+CALL zadacha4('Ivan Todorov Petkov');
