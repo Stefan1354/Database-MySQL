@@ -261,7 +261,7 @@ JOIN coaches ON sportgroups.coach_id=coaches.id
 JOIN sports ON sportgroups.sport_id=sports.id
 JOIN student_sport ON sportgroups.id=student_sport.sportgroup_id
 JOIN students ON student_sport.student_id=students.id
-WHERE coaches.name=coachName;
+WHERE coaches.name = coachName;
 END;
 |
 DELIMITER ;
@@ -280,7 +280,7 @@ JOIN student_sport ON students.id=student_sport.student_id
 JOIN sportgroups ON student_sport.sportgroup_id=sportgroups.id
 JOIN sports ON sportgroups.sport_id=sports.id
 JOIN coaches ON sportgroups.coach_id=coaches.id
-WHERE sportId=sports.id;
+WHERE sportId = sports.id;
 END;
 |
 DELIMITER ;
