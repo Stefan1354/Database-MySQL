@@ -316,18 +316,18 @@ JOIN student_sport ON student_sport.student_id = students.id
 JOIN sportgroups ON sportgroups.id = student_sport.sportgroup_id
 GROUP BY student_id
 HAVING COUNT(student_sport.sportgroup_id) > 1;
-
-end;
+END;
 |
-delimiter |
+DELIMITER |
 
 CALL studentsInfo();
+
 
 #3
 DELIMITER |
 CREATE PROCEDURE coachInfo()
 BEGIN
-	SELECT coaches.id, coaches.name
+    SELECT coaches.id, coaches.name
     FROM coaches 
     LEFT JOIN sportgroups
     ON coaches.id = sportgroups.coach_id
