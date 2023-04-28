@@ -70,7 +70,7 @@ CREATE TABLE salaryPayments(
 	salaryAmount DOUBLE ,
 	dateOfPayment DATETIME not null,
 	CONSTRAINT FOREIGN KEY (coach_id) 
-		REFERENCES coaches(id),
+	REFERENCES coaches(id),
 	UNIQUE KEY(`coach_id`,`month`,`year`)    
 )Engine = Innodb;
 
@@ -79,8 +79,8 @@ create table coach_work(
     coach_id INT not null,
     group_id INT not null,
     number_of_hours INT not null default 1,
-	date DATETIME not null,
-	isPayed BOOLEAN NOT NULL DEFAULT 0,
+    date DATETIME not null,
+    isPayed BOOLEAN NOT NULL DEFAULT 0,
     foreign key (coach_id) references coaches(id),
     foreign key (group_id) references sportgroups(id)
 )Engine = Innodb;
