@@ -308,7 +308,7 @@ DELIMITER $$
 CREATE PROCEDURE groupCount(IN coachName VARCHAR(255))
 BEGIN
     DECLARE coachCount INT;
-	DECLARE groupCount INT;
+    DECLARE groupCount INT;
     SELECT COUNT(*) INTO coachCount FROM coaches WHERE name = coachName;
     IF (coachCount = 0) THEN
         SELECT 'Trainer name entered incorrectly. Please, try again.' AS RESULT;
