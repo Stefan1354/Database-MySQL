@@ -278,7 +278,8 @@ JOIN student_sport ON
 sportgroups.id = student_sport.sportGroup_id
 JOIN coaches ON
 sportgroups.coach_id = coaches.id
-JOIN students ON student_sport.student_id = students.id
+JOIN students ON 
+student_sport.student_id = students.id
 WHERE sports.id = sportId;
 END$$
 DELIMITER ;
