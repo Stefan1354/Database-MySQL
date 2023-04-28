@@ -57,9 +57,9 @@ CREATE TABLE taxesPayments(
 	year YEAR,
 	dateOfPayment DATETIME NOT NULL ,
 	CONSTRAINT FOREIGN KEY (student_id) 
-		REFERENCES students(id),
+	REFERENCES students(id),
 	CONSTRAINT FOREIGN KEY (group_id) 
-		REFERENCES sportgroups(id)
+	REFERENCES sportgroups(id)
 )Engine = Innodb;
 
 CREATE TABLE salaryPayments(
