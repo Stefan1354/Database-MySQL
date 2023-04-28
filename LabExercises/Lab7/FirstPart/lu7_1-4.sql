@@ -307,20 +307,23 @@ CALL getPaymentInfo('Elena Petrova Petrova', 2022);
 DELIMITER $$
 CREATE PROCEDURE groupCount(IN coachName VARCHAR(255))
 BEGIN
-DECLARE counter INT;
-SELECT COUNT(sportgroups.coach_id) INTO counter
-FROM sportgroups JOIN coaches ON
-sportgroups.coach_id = coaches.id
-WHERE coaches.name = coachName;
-IF (counter = 0 OR counter = NULL)
-THEN
-SELECT 'Тhis trainer does not lead any group' AS RESULT;
-ELSE
-SELECT counter;
-END IF;
+    DECLARE coachCount INT;
+	DECLARE groupCount INT;
+    SELECT COUNT(*) INTO coachCount FROM coaches WHERE name = coachName;
+    IF (coachCount = 0) THEN
+        SELECT 'Trainer name entered incorrectly. Please, try again.' AS RESULT;
+    ELSE
+        SELECT COUNT(*) INTO groupCount FROM sportgroups WHERE coach_id = (SELECT id FROM coaches WHERE name = coachName);
+        IF (groupCount = 0) THEN
+            SELECT 'This coach does not lead any group.' AS RESULT;
+        ELSE
+            SELECT groupCount;
+        END IF;
+    END IF;
 END$$
 DELIMITER ;
 
 CALL groupCount('Ivan Todorov Petkov');
 CALL groupCount('georgi Ivanov Todorov');
 CALL groupCount('Slavi Petkov Petkov');
+CALL groupCount('Dobromir Hristov');
