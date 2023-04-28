@@ -287,7 +287,7 @@ CALL getAnotherInfo(1);
 
 
 #3
-/*DELIMITER $$
+DELIMITER $$
 CREATE PROCEDURE getPaymentInfo(IN student_name VARCHAR(255), IN inYear INT)
 BEGIN
 SELECT AVG(taxesPayments.paymentAmount) AS averageTaxes
