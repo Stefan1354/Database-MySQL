@@ -87,8 +87,8 @@ create table coach_work(
 
 INSERT INTO sports
 VALUES 	(NULL, 'Football') ,
-		(NULL, 'Volleyball'),
-		(NULL, 'Tennis');
+	(NULL, 'Volleyball'),
+	(NULL, 'Tennis');
 		
 INSERT INTO coaches  (name, egn)
 VALUES 	('Ivan Todorov Petkov', '7509041245') ,
