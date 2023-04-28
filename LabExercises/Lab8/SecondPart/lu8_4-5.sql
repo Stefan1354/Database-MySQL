@@ -41,14 +41,11 @@ DELIMITER |
 DROP PROCEDURE IF EXISTS converter;
 CREATE PROCEDURE converter (IN amount DOUBLE, IN currency VARCHAR(5), OUT returnAmount DOUBLE)
 BEGIN
-	IF (currency = "BGN")
-    THEN
-		SET returnAmount = amount * 0.51;
-	ELSE IF (currency = "EUR")
-	THEN	
-		SET returnAmount = amount * 1.94;
+	IF (currency = "BGN") THEN
+	    SET returnAmount = amount * 0.51;
+	ELSE IF (currency = "EUR") THEN	
+            SET returnAmount = amount * 1.94;
 	END IF;
-    END IF;
 END;
 |
 DELIMITER ;
