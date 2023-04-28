@@ -36,7 +36,7 @@ INSERT INTO `transaction_test`.`customer_accounts` (`amount`, `currency`, `custo
 VALUES ('17850', 'EUR', '2');  
     
 
-#1
+#5
 DELIMITER //
 DROP PROCEDURE IF EXISTS transfer_money;
 CREATE PROCEDURE transfer_money(IN from_acc_id INT, IN to_acc_id INT, IN transferAmount DECIMAL(10,2))
@@ -78,7 +78,7 @@ DELIMITER ;
 CALL transfer_money(1, 2, 5000);
 
 
-#2
+#6
 DELIMITER //
 DROP PROCEDURE IF EXISTS transfer_money;
 CREATE PROCEDURE transfer_money(
