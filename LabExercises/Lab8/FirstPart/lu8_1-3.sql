@@ -298,7 +298,7 @@ values (1, month(now()), year(now()), 1200, now()),
        
 CREATE  VIEW studentView
 AS
-SELECT coaches.name as coachName, concat(sportgroups.id , " - " , sportgroups.location), 
+SELECT coaches.name as coachName, CONCAT(sportgroups.id , " - " , sportgroups.location), 
 sports.name as SportName,  year(now()), month(now()), salarypayments.salaryAmount
 FROM coaches JOIN sportgroups
 ON coaches.id  = sportgroups.coach_id
