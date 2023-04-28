@@ -250,78 +250,76 @@ VALUES	(NULL, '1', '1', '200', '1', 2022, now()),
 		(NULL, '4', '2', '200', '2', 2020, now());
 
 #1
-DELIMITER |
-DROP PROCEDURE IF EXISTS zadacha1 |
-CREATE PROCEDURE zadacha1(IN coachName VARCHAR (255))
+DELIMITER $$
+CREATE PROCEDURE getInfo(IN coach_name VARCHAR(255))
 BEGIN
-SELECT sports.name, sportgroups.location, sportgroups.hourOfTraining, sportgroups.dayOfWeek, 
-students.name, students.phone
-FROM sportgroups
-JOIN coaches ON sportgroups.coach_id=coaches.id
-JOIN sports ON sportgroups.sport_id=sports.id
-JOIN student_sport ON sportgroups.id=student_sport.sportgroup_id
-JOIN students ON student_sport.student_id=students.id
-WHERE coaches.name = coachName;
-END;
-|
+SELECT sports.name AS sportName, sportgroups.location, sportgroups.hourOfTraining, sportgroups.dayOfWeek, students.name AS studentName, students.phone
+FROM sports JOIN sportgroups ON
+sports.id = sportgroups.sport_id
+JOIN coaches ON sportgroups.coach_id = coaches.id
+JOIN student_sport ON
+sportgroups.id = student_sport.sportGroup_id
+JOIN students ON students.id = student_sport.student_id
+WHERE coaches.name = coach_name;
+END$$
 DELIMITER ;
 
-CALL zadacha1('Ivan Todorov Petkov');
+CALL getInfo('Ivan Todorov Petkov');
 
 
 #2
-delimiter |
-DROP PROCEDURE IF EXISTS zadacha2 |
-CREATE PROCEDURE zadacha2(IN sportId INT)
+DELIMITER $$
+CREATE PROCEDURE getAnotherInfo(IN sportId INT)
 BEGIN
-SELECT sports.name AS nameOfSport, students.name AS studentName, coaches.name AS coachesName
-FROM students
-JOIN student_sport ON students.id=student_sport.student_id
-JOIN sportgroups ON student_sport.sportgroup_id=sportgroups.id
-JOIN sports ON sportgroups.sport_id=sports.id
-JOIN coaches ON sportgroups.coach_id=coaches.id
-WHERE sportId = sports.id;
-END;
-|
+SELECT sports.name AS sportName, students.name AS studentName, coaches.name AS coachName
+FROM sports JOIN sportgroups ON
+sports.id = sportgroups.sport_id
+JOIN student_sport ON
+sportgroups.id = student_sport.sportGroup_id
+JOIN coaches ON
+sportgroups.coach_id = coaches.id
+JOIN students ON student_sport.student_id = students.id
+WHERE sports.id = sportId;
+END$$
 DELIMITER ;
- 
-CALL zadacha2(1);
+
+CALL getAnotherInfo(1);
 
 
 #3
-DELIMITER |
-DROP PROCEDURE IF EXISTS zadacha3 |
-CREATE PROCEDURE zadacha3(IN studentName VARCHAR(255), inYear YEAR)
+/*DELIMITER $$
+CREATE PROCEDURE getPaymentInfo(IN student_name VARCHAR(255), IN inYear INT)
 BEGIN
-SELECT AVG(taxesPayments.paymentAmount) AS AverageTaxes
-FROM paymentAmount
-JOIN students ON students.id = taxespayments.student_id
-WHERE studentName = students.name
-AND inYear = taxespayments.year;
-END;
-|
+SELECT AVG(taxesPayments.paymentAmount) AS averageTaxes
+FROM taxesPayments JOIN students ON
+taxesPayments.student_id = students.id
+WHERE students.name = student_name 
+AND taxesPayments.year = inYear
+GROUP BY student_name, inYear;
+END$$
 DELIMITER ;
-CALL zadacha3('Iliyan Ivanov',2022);
+
+CALL getPaymentInfo('Elena Petrova Petrova', 2022);
 
 
 #4
-delimiter |
-DROP PROCEDURE IF EXISTS zadacha4 |
-CREATE PROCEDURE zadacha4(IN coachName VARCHAR(255))
+DELIMITER $$
+CREATE PROCEDURE groupCount(IN coachName VARCHAR(255))
 BEGIN
 DECLARE counter INT;
 SELECT COUNT(sportgroups.coach_id) INTO counter
-FROM coaches
-JOIN sportgroups ON sportgroups.coach_id=coaches.id
-WHERE coaches.name=coachName;
-IF(counter = 0 OR counter = NULL)
+FROM sportgroups JOIN coaches ON
+sportgroups.coach_id = coaches.id
+WHERE coaches.name = coachName;
+IF (counter = 0 OR counter = NULL)
 THEN
-SELECT 'No groups for the trainer!' AS RESULT;
+SELECT 'Тhis trainer does not lead any group' AS RESULT;
 ELSE
 SELECT counter;
 END IF;
-END;
-|
+END$$
 DELIMITER ;
- 
-CALL zadacha4('Ivan Todorov Petkov');
+
+CALL groupCount('Ivan Todorov Petkov');
+CALL groupCount('georgi Ivanov Todorov');
+CALL groupCount('Slavi Petkov Petkov');
