@@ -291,8 +291,8 @@ coach_loop - label*/
 #1
 INSERT INTO salarypayments (coach_id, month, year, salaryAmount, dateOfPayment)
 values (1, month(now()), year(now()), 1200, now()),
-	   (2, month(now()), year(now()), 1300, now()),
-	   (3, month(now()), year(now()), 1200, now()),
+       (2, month(now()), year(now()), 1300, now()),
+       (3, month(now()), year(now()), 1200, now()),
        (4, month(now()), year(now()), 1200, now()),
        (5, month(now()), year(now()), 1300, now());
        
@@ -305,7 +305,7 @@ ON coaches.id  = sportgroups.coach_id
 JOIN sports
 ON sports.id = sportgroups.sport_id
 JOIN salarypayments ON salarypayments.coach_id = coaches.id
-/**WHERE klauza da dobavq/;
+
 
 
 #2
