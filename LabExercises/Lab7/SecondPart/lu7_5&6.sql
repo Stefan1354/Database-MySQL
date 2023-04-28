@@ -52,22 +52,22 @@ SELECT amount INTO to_acc_balance FROM customer_accounts
 WHERE id = to_acc_id FOR UPDATE;
 
 IF from_acc_balance < transferAmount THEN
-   SET @error_message = 'Недостатъчно пари на сметката за трансфер.';
+   SET @error_message = 'Insufficient funds in transfer account.';
      ELSE
         UPDATE customer_accounts SET amount = amount - transferAmount WHERE id = from_acc_id;
            IF ROW_COUNT() = 0 THEN
-              SET @error_message = 'Неуспешна транзакция.';
+              SET @error_message = 'Transaction failed.';
               ROLLBACK;
                 SELECT @error_message;
            ELSE
                 UPDATE customer_accounts SET amount = amount + transferAmount WHERE id = to_acc_id;
            IF ROW_COUNT() = 0 THEN
-                SET @error_message = 'Неуспешна транзакция.';
+                SET @error_message = 'Transaction failed.';
                 ROLLBACK;
                 SELECT @error_message;
            ELSE
                 COMMIT;
-                SELECT 'Транзакцията беше успешна.';
+                SELECT 'The transaction was successful.';
             END IF;
         END IF;
     END IF;
