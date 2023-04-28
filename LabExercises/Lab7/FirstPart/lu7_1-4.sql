@@ -251,8 +251,8 @@ VALUES	(NULL, '1', '1', '200', '1', 2022, now()),
 
 #1
 DELIMITER |
-DROP procedure IF EXISTS zadacha1 |
-CREATE procedure zadacha1(IN coachName VARCHAR (255))
+DROP PROCEDURE IF EXISTS zadacha1 |
+CREATE PROCEDURE zadacha1(IN coachName VARCHAR (255))
 BEGIN
 SELECT sports.name, sportgroups.location, sportgroups.hourOfTraining, sportgroups.dayOfWeek, 
 students.name, students.phone
@@ -271,8 +271,8 @@ CALL zadacha1('Ivan Todorov Petkov');
 
 #2
 delimiter |
-DROP procedure IF EXISTS zadacha2 |
-CREATE procedure zadacha2(IN sportId INT)
+DROP PROCEDURE IF EXISTS zadacha2 |
+CREATE PROCEDURE zadacha2(IN sportId INT)
 BEGIN
 SELECT sports.name AS nameOfSport, students.name AS studentName, coaches.name AS coachesName
 FROM students
@@ -290,8 +290,8 @@ CALL zadacha2(1);
 
 #3
 DELIMITER |
-DROP procedure IF EXISTS zadacha3 |
-CREATE procedure zadacha3(IN studentName VARCHAR(255), inYear YEAR)
+DROP PROCEDURE IF EXISTS zadacha3 |
+CREATE PROCEDURE zadacha3(IN studentName VARCHAR(255), inYear YEAR)
 BEGIN
 SELECT AVG(taxesPayments.paymentAmount) AS AverageTaxes
 FROM paymentAmount
@@ -306,8 +306,8 @@ CALL zadacha3('Iliyan Ivanov',2022);
 
 #4
 delimiter |
-DROP procedure IF EXISTS zadacha4 |
-CREATE procedure zadacha4(IN coachName VARCHAR(255))
+DROP PROCEDURE IF EXISTS zadacha4 |
+CREATE PROCEDURE zadacha4(IN coachName VARCHAR(255))
 BEGIN
 DECLARE counter INT;
 SELECT COUNT(sportgroups.coach_id) INTO counter
