@@ -33,7 +33,7 @@ source VARCHAR(150) NOT NULL,
 type ENUM('IMAGE', 'VIDEO')
 );
 
-CREATE TABLE article_multimedia(
+CREATE TABLE article_multimedia (
 article_id INT NOT NULL,
 multimedia_id INT NOT NULL,
 PRIMARY KEY(article_id, multimedia_id),
@@ -41,7 +41,7 @@ CONSTRAINT FOREIGN KEY (article_id) REFERENCES articles(id),
 CONSTRAINT FOREIGN KEY (multimedia_id) REFERENCES multimedia(id)
 );
 
-CREATE TABLE comments(
+CREATE TABLE comments (
 id INT AUTO_INCREMENT PRIMARY KEY,
 text TEXT NOT NULL,
 date DATETIME NOT NULL,
