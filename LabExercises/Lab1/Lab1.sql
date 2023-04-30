@@ -20,7 +20,7 @@ id INT auto_increment PRIMARY KEY,
 sportName VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE sportGroups(
+CREATE TABLE sportGroups (
 id INT auto_increment PRIMARY KEY,
 dayOfWeek ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), 
 hourOfDay TIME NOT NULL,
@@ -32,7 +32,7 @@ CONSTRAINT FOREIGN KEY (coach_id) REFERENCES coaches(id),
 unique KEY(dayOfWeek, hourOfDay, place)
 );
 
-CREATE TABLE student_group(
+CREATE TABLE student_group (
 student_id INT NOT NULL,
 group_id INT NOT NULL,
 CONSTRAINT FOREIGN KEY (student_id) REFERENCES students(id),
