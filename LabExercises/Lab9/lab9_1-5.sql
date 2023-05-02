@@ -389,7 +389,7 @@ GROUP BY student_sport.student_id;
 */
 
 #5
-delimiter |
+/*delimiter |
 CREATE PROCEDURE sport_info(IN given_sport VARCHAR(100))
 BEGIN
 SELECT sports.name, coaches.name, sportgroups.location, sportgroups.hourOfTraining, sportgroups.dayOfWeek
@@ -404,6 +404,4 @@ delimiter ;
 
 CALL sport_info("Volleyball");
 
-DROP PROCEDURE IF EXISTS sport_info;
- 
-
+DROP PROCEDURE IF EXISTS sport_info;*/
