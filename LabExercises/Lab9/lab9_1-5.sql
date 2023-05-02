@@ -348,7 +348,7 @@ DELETE FROM salarypayments WHERE id = 6;
 
 
 #2
-/*DELETE FROM salarypayments;
+DELETE FROM salarypayments;
  
 INSERT INTO salarypayments(
 coach_id,
@@ -365,7 +365,7 @@ FROM salarypayments_log
 WHERE operation = "DELETE";
  
  
-SELECT * FROM salarypayments;*/
+SELECT * FROM salarypayments;
 
 #3
 /*DROP TRIGGER IF EXISTS before_student_sport_insert;
