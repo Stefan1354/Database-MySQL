@@ -68,13 +68,13 @@ CREATE TABLE salaryPayments(
 	salaryAmount double,
 	dateOfPayment datetime not null,
 	CONSTRAINT FOREIGN KEY (coach_id) 
-		REFERENCES coaches(id),
+	REFERENCES coaches(id),
 	UNIQUE KEY(`coach_id`,`month`,`year`)
 );
 
 INSERT INTO sports
 VALUES 	(NULL, 'Football') ,
-		(NULL, 'Volleyball') ,
+	(NULL, 'Volleyball') ,
 		(NULL, 'Tennis') ,
 		(NULL, 'Karate') ,
 		(NULL, 'Taekwon-do');
