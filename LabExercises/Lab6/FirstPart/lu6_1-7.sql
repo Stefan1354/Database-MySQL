@@ -75,9 +75,9 @@ CREATE TABLE salaryPayments(
 INSERT INTO sports
 VALUES 	(NULL, 'Football') ,
 	(NULL, 'Volleyball') ,
-		(NULL, 'Tennis') ,
-		(NULL, 'Karate') ,
-		(NULL, 'Taekwon-do');
+	(NULL, 'Tennis') ,
+	(NULL, 'Karate') ,
+	(NULL, 'Taekwon-do');
 		
 INSERT INTO coaches  
 VALUES 	(NULL, 'Ivan Todorov Petkov', '7509041245') ,
