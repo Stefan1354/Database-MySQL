@@ -31,9 +31,9 @@ CREATE TABLE school_sport_clubs.sportGroups(
 	coach_id INT NULL ,
 	UNIQUE KEY(location,dayOfWeek,hourOfTraining)  ,
 	CONSTRAINT FOREIGN KEY(sport_id) 
-		REFERENCES sports(id) ,
+	REFERENCES sports(id) ,
 	CONSTRAINT FOREIGN KEY (coach_id) 
-		REFERENCES coaches(id)
+	REFERENCES coaches(id)
 );
 
 CREATE TABLE school_sport_clubs.student_sport(
