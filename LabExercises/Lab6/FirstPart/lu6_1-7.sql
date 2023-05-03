@@ -40,9 +40,9 @@ CREATE TABLE school_sport_clubs.student_sport(
 	student_id INT NOT NULL , 
 	sportGroup_id INT NOT NULL ,  
 	CONSTRAINT FOREIGN KEY (student_id) 
-		REFERENCES students(id) ,	
+	REFERENCES students(id) ,	
 	CONSTRAINT FOREIGN KEY (sportGroup_id) 
-		REFERENCES sportGroups(id) ,
+	REFERENCES sportGroups(id) ,
 	PRIMARY KEY(student_id,sportGroup_id)
 );
 
@@ -55,9 +55,9 @@ CREATE TABLE taxesPayments(
 	year YEAR,
 	dateOfPayment DATETIME NOT NULL ,
 	CONSTRAINT FOREIGN KEY (student_id) 
-		REFERENCES students(id),
+	REFERENCES students(id),
 	CONSTRAINT FOREIGN KEY (group_id) 
-		REFERENCES sportgroups(id)
+	REFERENCES sportgroups(id)
 );
 
 CREATE TABLE salaryPayments(
