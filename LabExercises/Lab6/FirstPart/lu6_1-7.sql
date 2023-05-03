@@ -81,11 +81,11 @@ VALUES 	(NULL, 'Football') ,
 		
 INSERT INTO coaches  
 VALUES 	(NULL, 'Ivan Todorov Petkov', '7509041245') ,
-		(NULL, 'georgi Ivanov Todorov', '8010091245') ,
-		(NULL, 'Ilian Todorov Georgiev', '8407106352') ,
-		(NULL, 'Petar Slavkov Yordanov', '7010102045') ,
-		(NULL, 'Todor Ivanov Ivanov', '8302160980') , 
-		(NULL, 'Slavi Petkov Petkov', '7106041278');
+	(NULL, 'georgi Ivanov Todorov', '8010091245') ,
+	(NULL, 'Ilian Todorov Georgiev', '8407106352') ,
+	(NULL, 'Petar Slavkov Yordanov', '7010102045') ,
+	(NULL, 'Todor Ivanov Ivanov', '8302160980') , 
+	(NULL, 'Slavi Petkov Petkov', '7106041278');
 		
 INSERT INTO students (name, egn, address, phone, class) 
 VALUES 	('Iliyan Ivanov', '9401150045', 'Sofia-Mladost 1', '0893452120', '10') ,
