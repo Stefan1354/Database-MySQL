@@ -75,7 +75,7 @@ CREATE TABLE salaryPayments(
 )Engine = Innodb;
 
 create table coach_work(
-	id INT auto_increment primary key,
+    id INT auto_increment primary key,
     coach_id INT not null,
     group_id INT not null,
     number_of_hours INT not null default 1,
