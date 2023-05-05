@@ -368,7 +368,7 @@ WHERE operation = "DELETE";
 SELECT * FROM salarypayments;
 
 #3
-/*DROP TRIGGER IF EXISTS before_student_sport_insert;
+DROP TRIGGER IF EXISTS before_student_sport_insert;
 delimiter |
 CREATE TRIGGER before_student_sport_insert BEFORE INSERT ON student_sport
 FOR EACH ROW
@@ -379,7 +379,7 @@ SET message_text = 'A student cannot be added in more than 2 groups.';
 END IF;
 end;
 |
-delimiter ;*/
+delimiter ;
 
 #4
 /*CREATE OR REPLACE VIEW names AS
