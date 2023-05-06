@@ -85,7 +85,7 @@ CREATE PROCEDURE transfer_money(
     IN sender_name VARCHAR(255),
     IN recipient_name VARCHAR(255),
     IN transferAmount DOUBLE,
-    IN currency VARCHAR(10)
+    IN tempCurrency VARCHAR(10)
 )
 BEGIN
     DECLARE sender_id, recipient_id, affected_rows INT;
@@ -97,22 +97,22 @@ SELECT id INTO recipient_id FROM customers
 WHERE name = recipient_name;
     
 SELECT transferAmount INTO sender_balance FROM customer_accounts 
-WHERE customer_id = sender_id AND currency = currency;
+WHERE customer_id = sender_id AND currency = tempCurrency;
 SELECT transferAmount INTO recipient_balance FROM customer_accounts 
-WHERE customer_id = recipient_id AND currency = currency;
+WHERE customer_id = recipient_id AND currency = tempCurrency;
     
 IF sender_balance < amount THEN
       SELECT 'Not enough funds' AS error_message;
 ELSE
-      UPDATE customer_accounts SET transferAmount = sender_balance - transferAmount WHERE customer_id = sender_id AND currency = currency;
+      UPDATE customer_accounts SET transferAmount = sender_balance - transferAmount WHERE customer_id = sender_id AND currency = tempCurrency;
       SET affected_rows = ROW_COUNT();
       IF affected_rows = 0 THEN
             SELECT 'Transaction failed' AS error_message;
       ELSE
-            UPDATE customer_accounts SET transferAmount = recipient_balance + transferAmount WHERE customer_id = recipient_id AND currency = currency;
+            UPDATE customer_accounts SET transferAmount = recipient_balance + transferAmount WHERE customer_id = recipient_id AND currency = tempCurrency;
             SET affected_rows = ROW_COUNT();
             IF affected_rows = 0 THEN
-                UPDATE customer_accounts SET transferAmount = sender_balance WHERE customer_id = sender_id AND currency = currency;
+                UPDATE customer_accounts SET transferAmount = sender_balance WHERE customer_id = sender_id AND currency = tempCurrency;
                 SELECT 'Transaction failed' AS error_message;
             ELSE
                 SELECT 'Transaction successful' AS status_message;
