@@ -325,6 +325,35 @@ CALL getTaxesInfo(2);
 
 
 #4
+#first_way
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS getCoachInfo;
+CREATE PROCEDURE getCoachInfo(IN coaches_name VARCHAR(255))
+BEGIN
+    IF (SELECT COUNT(*) FROM coaches WHERE name = coaches_name) = 0 THEN
+        SELECT 'Coach does not exist' AS RESULT;
+    ELSEIF (SELECT COUNT(*) FROM sportgroups 
+        JOIN coaches ON sportgroups.coach_id = coaches.id 
+        WHERE coaches.name = coaches_name) > 0 THEN
+        SELECT coaches.id AS coachID, sportgroups.id AS sportGroupID
+        FROM coaches 
+        JOIN sportgroups ON coaches.id = sportgroups.coach_id
+        WHERE coaches.name = coaches_name
+        GROUP BY coaches.id, sportgroups.id;
+    ELSE
+        SELECT 'This coach doesnt lead any group' AS RESULT;
+    END IF;
+END;
+$$
+DELIMITER ;
+
+CALL getCoachInfo('Ivan Todorov Petkov');
+CALL getCoachInfo('Slavi Petkov Petkov');
+CALL getCoachInfo('Stoyan Ivanov');
+
+
+#second_way
 DELIMITER $$
 CREATE PROCEDURE groupCount(IN coachName VARCHAR(255))
 BEGIN
