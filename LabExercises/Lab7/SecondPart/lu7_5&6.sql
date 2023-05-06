@@ -44,7 +44,7 @@ BEGIN
     DECLARE from_acc_balance DECIMAL(10, 2);
     DECLARE to_acc_balance DECIMAL(10, 2);
 
-    START TRANSACTION;
+START TRANSACTION;
 
 SELECT amount INTO from_acc_balance FROM customer_accounts 
 WHERE id = from_acc_id FOR UPDATE;
@@ -82,10 +82,10 @@ CALL transfer_money(1, 2, 5000);
 DELIMITER //
 DROP PROCEDURE IF EXISTS transfer_money;
 CREATE PROCEDURE transfer_money(
-IN sender_name VARCHAR(255),
-IN recipient_name VARCHAR(255),
-IN transferAmount DOUBLE,
-IN currency VARCHAR(10)
+    IN sender_name VARCHAR(255),
+    IN recipient_name VARCHAR(255),
+    IN transferAmount DOUBLE,
+    IN currency VARCHAR(10)
 )
 BEGIN
     DECLARE sender_id, recipient_id, affected_rows INT;
