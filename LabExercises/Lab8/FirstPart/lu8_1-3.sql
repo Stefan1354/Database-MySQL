@@ -324,6 +324,8 @@ CALL studentsInfo();
 
 
 #3
+#first_way
+
 DELIMITER |
 CREATE PROCEDURE coachInfo()
 BEGIN
@@ -340,3 +342,18 @@ END;
 DELIMITER ;
 
 CALL coachInfo();
+
+
+#second_way
+
+/*DELIMITER $$
+DROP PROCEDURE IF EXISTS get_coaches_without_groups;
+CREATE PROCEDURE get_coaches_without_groups()
+BEGIN
+	SELECT id, name FROM coaches
+    WHERE id NOT IN (SELECT DISTINCT coach_id FROM sportgroups);
+END;
+$$
+DELIMITER ;
+
+CALL get_coaches_without_groups();*/
