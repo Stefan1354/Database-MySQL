@@ -313,7 +313,6 @@ CREATE PROCEDURE studentsInfo()
 BEGIN
 SELECT students.name FROM students
 JOIN student_sport ON student_sport.student_id = students.id
-JOIN sportgroups ON sportgroups.id = student_sport.sportgroup_id
 GROUP BY student_id
 HAVING COUNT(student_sport.sportgroup_id) > 1;
 END;
