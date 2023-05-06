@@ -326,7 +326,6 @@ CALL getTaxesInfo(2);
 
 #4
 #first_way
-
 DELIMITER $$
 DROP PROCEDURE IF EXISTS getCoachInfo;
 CREATE PROCEDURE getCoachInfo(IN coaches_name VARCHAR(255))
