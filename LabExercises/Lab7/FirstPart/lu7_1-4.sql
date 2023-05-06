@@ -303,6 +303,26 @@ DELIMITER ;
 
 CALL getPaymentInfo('Elena Petrova Petrova', 2022);
 
+#3+
+/*процедура, която по подадено id на студент извежда името на студента и таксите, които са по-големи от средноаритметичното на всички такси*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS getTaxesInfo;
+CREATE PROCEDURE getTaxesInfo(IN student_id INT)
+BEGIN
+	SELECT DISTINCT students.name, taxespayments.paymentAmount
+    FROM students JOIN taxespayments ON
+    students.id = taxespayments.student_id
+    WHERE taxespayments.paymentAmount > (SELECT avg(paymentAmount) FROM taxespayments) 
+    AND students.id = student_id;
+END;
+$$
+DELIMITER ;
+
+SELECT @@session.pseudo_thread_id;
+SET @@session.pseudo_thread_id = 0;
+
+CALL getTaxesInfo(2);
+
 
 #4
 DELIMITER $$
