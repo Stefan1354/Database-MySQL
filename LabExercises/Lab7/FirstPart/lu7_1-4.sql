@@ -309,7 +309,7 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS getTaxesInfo;
 CREATE PROCEDURE getTaxesInfo(IN student_id INT)
 BEGIN
-	SELECT DISTINCT students.name, taxespayments.paymentAmount
+    SELECT DISTINCT students.name, taxespayments.paymentAmount
     FROM students JOIN taxespayments ON
     students.id = taxespayments.student_id
     WHERE taxespayments.paymentAmount > (SELECT avg(paymentAmount) FROM taxespayments) 
