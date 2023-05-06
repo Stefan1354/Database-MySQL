@@ -304,7 +304,7 @@ DELIMITER ;
 CALL getPaymentInfo('Elena Petrova Petrova', 2022);
 
 #3+
-/*процедура, която по подадено id на студент извежда името на студента и таксите, които са по-големи от средноаритметичното на всички такси*/
+/*процедура, която по подадено id на студент извежда името на студента и размера на таксите, които са по-големи от средноаритметичната стойност на всички такси в базата*/
 DELIMITER $$
 DROP PROCEDURE IF EXISTS getTaxesInfo;
 CREATE PROCEDURE getTaxesInfo(IN student_id INT)
