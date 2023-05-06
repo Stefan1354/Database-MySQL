@@ -296,7 +296,7 @@ coaches.id = sportgroups.coach_id
 LEFT JOIN sports ON sportgroups.sport_id = sports.id;
 
 #7
-SELECT sports.name, sportgroups.location, COUNT(students.id) AS numOfStudents
+SELECT sports.name, sportgroups.location, COUNT(students.id) AS numberOfStudents
 FROM sports JOIN sportgroups ON sports.id = sportgroups.sport_id
 JOIN student_sport ON sportgroups.id = student_sport.sportGroup_id
 JOIN students ON students.id = student_sport.student_id
