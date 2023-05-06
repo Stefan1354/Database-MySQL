@@ -50,7 +50,7 @@ END;
 |
 DELIMITER ;
 
-CALL converter('1000.00', 'BGN', @returnAmount)
+CALL converter('1000.00', 'BGN', @returnAmount);
 
 
 #5
