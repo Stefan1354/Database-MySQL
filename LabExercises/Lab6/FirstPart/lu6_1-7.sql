@@ -280,7 +280,7 @@ JOIN sportgroups ON taxespayments.group_id = sportgroups.id
 JOIN coaches ON sportgroups.coach_id = coaches.id
 WHERE coaches.egn = '7509041245'
 GROUP BY student_id, month
-HAVING sumTaxes > 250;
+HAVING sumTaxes > 700;
 
 #5
 SELECT COUNT(students.id)
