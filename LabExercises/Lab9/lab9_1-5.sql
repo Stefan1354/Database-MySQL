@@ -382,11 +382,11 @@ end;
 delimiter ;
 
 #4
-/*CREATE OR REPLACE VIEW names AS
+CREATE OR REPLACE VIEW names AS
 SELECT students.name, COUNT(sportgroup_id) AS number_of_groups
 FROM students JOIN student_sport ON student_sport.student_id=students.id
 GROUP BY student_sport.student_id;
-*/
+
 
 #5
 /*delimiter |
