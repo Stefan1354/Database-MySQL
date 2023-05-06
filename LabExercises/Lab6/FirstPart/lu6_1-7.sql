@@ -283,7 +283,7 @@ GROUP BY student_id, month
 HAVING sumTaxes > 700;
 
 #5
-SELECT COUNT(students.id)
+SELECT COUNT(students.id) AS numberOfStudents
 FROM students JOIN student_sport ON students.id = student_sport.student_id
 JOIN sportgroups ON student_sport.sportGroup_id = sportgroups.id
 JOIN sports ON sportgroups.sport_id = sports.id
