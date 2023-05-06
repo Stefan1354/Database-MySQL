@@ -350,7 +350,7 @@ CALL coachInfo();
 DROP PROCEDURE IF EXISTS get_coaches_without_groups;
 CREATE PROCEDURE get_coaches_without_groups()
 BEGIN
-	SELECT id, name FROM coaches
+    SELECT id, name FROM coaches
     WHERE id NOT IN (SELECT DISTINCT coach_id FROM sportgroups);
 END;
 $$
