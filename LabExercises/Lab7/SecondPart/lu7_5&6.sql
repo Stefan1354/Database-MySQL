@@ -104,12 +104,12 @@ WHERE customer_id = recipient_id AND currency = tempCurrency;
 IF sender_balance < transferAmount THEN
       SELECT 'Not enough funds' AS error_message;
 ELSE
-      UPDATE customer_accounts SET amount = sender_balance - transferAmount WHERE customer_id = sender_id AND currency = tempCurrency;
+      UPDATE customer_accounts SET amount = amount - transferAmount WHERE customer_id = sender_id AND currency = tempCurrency;
       SET affected_rows = ROW_COUNT();
       IF affected_rows = 0 THEN
             SELECT 'Transaction failed' AS error_message;
       ELSE
-            UPDATE customer_accounts SET amount = recipient_balance + transferAmount WHERE customer_id = recipient_id AND currency = tempCurrency;
+            UPDATE customer_accounts SET amount = amount + transferAmount WHERE customer_id = recipient_id AND currency = tempCurrency;
             SET affected_rows = ROW_COUNT();
             IF affected_rows = 0 THEN
                 SELECT 'Transaction failed' AS error_message;
