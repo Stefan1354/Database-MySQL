@@ -108,10 +108,10 @@ VALUES 	('Iliyan Ivanov', '9401150045', 'Sofia-Mladost 1', '0893452120', '10') ,
 		
 INSERT INTO sportGroups
 VALUES 	(NULL, 'Sofia-Mladost 1', 'Monday', '08:00:00', 1, 1 ) ,
-		(NULL, 'Sofia-Mladost 1', 'Monday', '09:30:00', 1, 2 ) ,
-		(NULL, 'Sofia-Liylin 7', 'Sunday', '08:00:00', 2, 1) ,
-		(NULL, 'Sofia-Liylin 7', 'Sunday', '09:30:00', 2, 2) ,		
-		(NULL, 'Plovdiv', 'Monday', '12:00:00', '1', '1');
+	(NULL, 'Sofia-Mladost 1', 'Monday', '09:30:00', 1, 2 ) ,
+	(NULL, 'Sofia-Liylin 7', 'Sunday', '08:00:00', 2, 1) ,
+	(NULL, 'Sofia-Liylin 7', 'Sunday', '09:30:00', 2, 2) ,		
+	(NULL, 'Plovdiv', 'Monday', '12:00:00', '1', '1');
 		
 INSERT INTO student_sport 
 VALUES 	(1, 1),
