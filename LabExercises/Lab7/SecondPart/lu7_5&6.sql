@@ -119,3 +119,7 @@ ELSE
         END IF;
     END IF;
 END;
+//
+DELIMITER ;
+
+CALL transfer_money('Ivan Petrov Iordanov', 'Stoyan Pavlov Pavlov', 1000.00, 'BGN');
