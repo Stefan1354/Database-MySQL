@@ -368,6 +368,7 @@ WHERE operation = "DELETE";
 SELECT * FROM salarypayments;
 
 #3
+#first_way
 DROP TRIGGER IF EXISTS before_student_sport_insert;
 delimiter |
 CREATE TRIGGER before_student_sport_insert BEFORE INSERT ON student_sport
@@ -380,6 +381,24 @@ END IF;
 end;
 |
 delimiter ;
+
+
+#second_way
+DROP TRIGGER IF EXISTS max_groups_per_student_trigger;
+DELIMITER $$
+CREATE TRIGGER max_groups_per_student_trigger
+BEFORE INSERT ON student_sport
+FOR EACH ROW
+BEGIN
+    DECLARE group_cont INT;
+    SELECT COUNT(*) INTO group_count FROM student_sport WHERE student_id = NEW.student_id;
+    IF group_count > 2 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Student is already assigned to the maximum number of groups.';
+    END IF;
+END;
+$$
+DELIMITER ;
+
 
 #4
 CREATE OR REPLACE VIEW names AS
