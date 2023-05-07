@@ -290,7 +290,7 @@ coach_loop - label*/
 
 #1
 INSERT INTO salarypayments (coach_id, month, year, salaryAmount, dateOfPayment)
-values (1, month(now()), year(now()), 1200, now()),
+VALUES (1, month(now()), year(now()), 1200, now()),
        (2, month(now()), year(now()), 1300, now()),
        (3, month(now()), year(now()), 1200, now()),
        (4, month(now()), year(now()), 1200, now()),
