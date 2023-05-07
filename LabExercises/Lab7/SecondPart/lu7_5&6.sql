@@ -112,7 +112,6 @@ ELSE
             UPDATE customer_accounts SET amount = recipient_balance + transferAmount WHERE customer_id = recipient_id AND currency = tempCurrency;
             SET affected_rows = ROW_COUNT();
             IF affected_rows = 0 THEN
-                UPDATE customer_accounts SET amount = sender_balance WHERE customer_id = sender_id AND currency = tempCurrency;
                 SELECT 'Transaction failed' AS error_message;
             ELSE
                 SELECT 'Transaction successful' AS status_message;
