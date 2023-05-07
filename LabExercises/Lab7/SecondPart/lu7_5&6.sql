@@ -96,9 +96,9 @@ WHERE name = sender_name;
 SELECT id INTO recipient_id FROM customers 
 WHERE name = recipient_name;
     
-SELECT transferAmount INTO sender_balance FROM customer_accounts 
+SELECT amount INTO sender_balance FROM customer_accounts 
 WHERE customer_id = sender_id AND currency = tempCurrency;
-SELECT transferAmount INTO recipient_balance FROM customer_accounts 
+SELECT amount INTO recipient_balance FROM customer_accounts 
 WHERE customer_id = recipient_id AND currency = tempCurrency;
     
 IF sender_balance < transferAmount THEN
