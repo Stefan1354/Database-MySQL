@@ -424,4 +424,4 @@ delimiter ;
 
 CALL sport_info("Volleyball");
 
-DROP PROCEDURE IF EXISTS sport_info;*/
+DROP PROCEDURE IF EXISTS sport_info;
