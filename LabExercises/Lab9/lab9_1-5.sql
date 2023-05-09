@@ -74,7 +74,7 @@ CREATE TABLE salaryPayments(
 	UNIQUE KEY(`coach_id`,`month`,`year`)    
 )Engine = Innodb;
 		
-create table coach_work(
+CREATE TABLE coach_work(
 	id INT auto_increment primary key,
         coach_id INT not null,
         group_id INT not null,
@@ -85,7 +85,7 @@ create table coach_work(
         foreign key (group_id) references sportgroups(id)
 )Engine = Innodb;
 
-create table salarypayments_log(
+CREATE TABLE salarypayments_log(
 id INT auto_increment primary key,
 operation ENUM('INSERT','UPDATE','DELETE') not null,
 old_coach_id INT,
