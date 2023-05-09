@@ -345,7 +345,7 @@ CALL coachInfo();
 
 #second_way
 
-/*DELIMITER $$
+DELIMITER $$
 DROP PROCEDURE IF EXISTS get_coaches_without_groups;
 CREATE PROCEDURE get_coaches_without_groups()
 BEGIN
@@ -355,4 +355,4 @@ END;
 $$
 DELIMITER ;
 
-CALL get_coaches_without_groups();*/
+CALL get_coaches_without_groups();
