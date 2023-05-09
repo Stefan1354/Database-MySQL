@@ -409,7 +409,7 @@ GROUP BY student_sport.student_id;
 
 
 #5
-/*delimiter |
+DELIMITER |
 CREATE PROCEDURE sport_info(IN given_sport VARCHAR(100))
 BEGIN
 SELECT sports.name, coaches.name, sportgroups.location, sportgroups.hourOfTraining, sportgroups.dayOfWeek
