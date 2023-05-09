@@ -325,8 +325,9 @@ INSERT INTO `school_sport_clubs`.`coach_work` (`coach_id`, `group_id`, `number_o
 
 #1
 DROP TRIGGER IF EXISTS before_salarypayment_delete;
-delimiter |
-CREATE TRIGGER before_salarypayment_delete BEFORE DELETE ON salarypayments
+DELIMITER |
+CREATE TRIGGER before_salarypayment_delete 
+BEFORE DELETE ON salarypayments
 FOR EACH ROW
 BEGIN
 INSERT INTO salarypayments_log(operation,
@@ -338,9 +339,9 @@ old_dateOfPayment,
 dateOfLog)
 VALUES('DELETE', OLD.coach_id, OLD.month,
 OLD.year, OLD.salaryAmount, OLD.dateOfPayment, NOW());
-end;
+END;
 |
-delimiter ;
+DELIMITER ;
 
 UPDATE salarypayments SET salaryamount = '2000' WHERE id = 13;
 DELETE FROM salarypayments WHERE id = 6;
