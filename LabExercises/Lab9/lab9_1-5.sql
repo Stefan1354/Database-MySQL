@@ -347,7 +347,6 @@ UPDATE salarypayments SET salaryamount = '2000' WHERE id = 13;
 DELETE FROM salarypayments WHERE id = 6;
 
 
-
 #2
 DELETE FROM salarypayments;
  
@@ -367,6 +366,7 @@ WHERE operation = "DELETE";
  
  
 SELECT * FROM salarypayments;
+
 
 #3
 #first_way
@@ -410,6 +410,7 @@ GROUP BY student_sport.student_id;
 
 #5
 DELIMITER |
+DROP PROCEDURE IF EXISTS sport_info;
 CREATE PROCEDURE sport_info(IN given_sport VARCHAR(100))
 BEGIN
 SELECT sports.name, coaches.name, sportgroups.location, sportgroups.hourOfTraining, sportgroups.dayOfWeek
@@ -418,10 +419,7 @@ JOIN sportgroups ON sportgroups.sport_id = sports.id
 JOIN coaches ON sportgroups.coach_id = coaches.id
 WHERE sports.name = given_sport;
 END;
-
 |
 DELIMITER ;
 
 CALL sport_info("Volleyball");
-
-DROP PROCEDURE IF EXISTS sport_info;
