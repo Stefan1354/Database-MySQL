@@ -420,7 +420,7 @@ WHERE sports.name = given_sport;
 END;
 
 |
-delimiter ;
+DELIMITER ;
 
 CALL sport_info("Volleyball");
 
