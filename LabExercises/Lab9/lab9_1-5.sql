@@ -371,7 +371,7 @@ SELECT * FROM salarypayments;
 #3
 #first_way
 DROP TRIGGER IF EXISTS before_student_sport_insert;
-delimiter |
+DELIMITER |
 CREATE TRIGGER before_student_sport_insert BEFORE INSERT ON student_sport
 FOR EACH ROW
 BEGIN
@@ -379,9 +379,9 @@ IF (SELECT COUNT(*) FROM student_sport WHERE student_id = NEW.student_id) >=2 TH
 SIGNAL SQLSTATE '45000'
 SET message_text = 'A student cannot be added in more than 2 groups.';
 END IF;
-end;
+END;
 |
-delimiter ;
+DELIMITER ;
 
 
 #second_way
