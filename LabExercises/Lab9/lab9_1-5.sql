@@ -277,14 +277,14 @@ VALUES	(NULL, '1', '1', '200', '1', 2023, now()),
 		
 INSERT INTO `school_sport_clubs`.`salaryPayments` 
 VALUES	(NULL, '1', 1, 2023, 2500, now()),
-		(NULL, '1', 2, 2023, 2500, now()),
-		(NULL, '1', 3, 2023, 2500, now()),
-		(NULL, '1', 4, 2023, 2500, now()),
-		(NULL, '2', 1, 2023, 3600, now()),
-		(NULL, '2', 2, 2023, 3600, now()),
-		(NULL, '2', 3, 2023, 3600, now()),
-		(NULL, '2', 4, 2023, 3600, now()),
-		(NULL, '3', 1, 2023, 1500, now()),
+	(NULL, '1', 2, 2023, 2500, now()),
+	(NULL, '1', 3, 2023, 2500, now()),
+	(NULL, '1', 4, 2023, 2500, now()),
+	(NULL, '2', 1, 2023, 3600, now()),
+	(NULL, '2', 2, 2023, 3600, now()),
+	(NULL, '2', 3, 2023, 3600, now()),
+	(NULL, '2', 4, 2023, 3600, now()),
+	(NULL, '3', 1, 2023, 1500, now()),
 		(NULL, '3', 2, 2023, 1500, now()),
 		(NULL, '3', 3, 2023, 1500, now()),
 		(NULL, '3', 4, 2023, 1500, now()),
@@ -343,7 +343,6 @@ END;
 |
 DELIMITER ;
 
-UPDATE salarypayments SET salaryamount = '2000' WHERE id = 13;
 DELETE FROM salarypayments WHERE id = 6;
 
 
