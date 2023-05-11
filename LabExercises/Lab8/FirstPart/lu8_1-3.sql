@@ -314,7 +314,7 @@ BEGIN
 SELECT students.name FROM students
 JOIN student_sport ON student_sport.student_id = students.id
 GROUP BY student_id
-HAVING COUNT(student_sport.sportgroup_id) > 1;
+HAVING COUNT(student_sport.sportGroup_id) > 1;
 END;
 |
 DELIMITER |
