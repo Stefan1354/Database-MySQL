@@ -18,8 +18,8 @@ CREATE TABLE `cableCompany`.`accounts` (
 	`amount` DOUBLE NOT NULL ,
 	`customer_id` INT UNSIGNED NOT NULL ,
 	CONSTRAINT FOREIGN KEY ( `customer_id` )
-		REFERENCES `cableCompany`.`customers` ( `customerID` )
-		ON DELETE RESTRICT ON UPDATE CASCADE
+	REFERENCES `cableCompany`.`customers` ( `customerID` )
+	ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE `cableCompany`.`plans` (
@@ -37,9 +37,9 @@ CREATE TABLE `cableCompany`.`payments`(
 	`customer_id` INT UNSIGNED NOT NULL ,
 	`plan_id` INT UNSIGNED NOT NULL ,		
 	CONSTRAINT FOREIGN KEY ( `customer_id` )
-		REFERENCES `cableCompany`.`customers`( `customerID` ) ,
+	REFERENCES `cableCompany`.`customers`( `customerID` ) ,
 	CONSTRAINT FOREIGN KEY ( `plan_id` ) 
-		REFERENCES `cableCompany`.`plans` ( `planID` ) ,
+	REFERENCES `cableCompany`.`plans` ( `planID` ) ,
 	UNIQUE KEY ( `customer_id`, `plan_id`,`month`,`year` )
 )ENGINE = InnoDB;
 
@@ -48,9 +48,9 @@ CREATE TABLE `cableCompany`.`debtors`(
 	`plan_id` INT UNSIGNED NOT NULL ,
 	`debt_amount` DOUBLE NOT NULL ,
 	FOREIGN KEY ( `customer_id` )
-		REFERENCES `cableCompany`.`customers`( `customerID` ) ,
+	REFERENCES `cableCompany`.`customers`( `customerID` ) ,
 	FOREIGN KEY ( `plan_id` )
-		REFERENCES `cableCompany`.`plans`( `planID` ) ,
+	REFERENCES `cableCompany`.`plans`( `planID` ) ,
 	PRIMARY KEY ( `customer_id`, `plan_id` )
 ) ENGINE = InnoDB;
 
@@ -90,7 +90,7 @@ VALUES
     (99.99, 4, 2022, '2022-04-01 00:00:00', 4, 4),
     (149.99, 5, 2022, '2022-05-01 00:00:00', 5, 5);
 
--- Вмъкване на тестови данни за таблица debtors
+
 INSERT INTO `debtors` (`customer_id`, `plan_id`, `debt_amount`)
 VALUES 
     (1, 1, 50.00),
@@ -102,119 +102,120 @@ VALUES
 
 
 #1
-/*DELIMITER //
+delimiter |
+create procedure payment_fee(IN cl_id INT, IN amount_fee double, OUT res BIT)
+begin
+	declare customer_acc_amount double;
+    declare payment_plan_id int;
+    
+    select amount into customer_acc_acount
+    from accounts
+    where customer_id = cl_id;
+    
+    if (customer_acc_amount < amount_fee)
+    then
+		set res = 0;
+		signal sqlstate '45000' set message_text = "Not enough money for the payment";
+	else
+		select plan_id into payment_plan_id
+        from payments
+        where paymentAmount = amount_fee
+        and customer_id = cl_id;
+        
+        start transaction;
+			insert into payments
+            values (null, amount_fee, month(now()), year(now()), now(), cl_id, payment_plan_id);
+            
+            update accounts
+            set amount = amount - amount_fee
+            where custmer_id = cl_id;
+            
+            if (row_count() = 0)
+            then
+				select "Error";
+                set res = 0;
+                rollback;
+			else
+				set res = 1;
+				commit;
+			end if;
+    end if;
+end;
+|
+delimiter ;
 
-CREATE PROCEDURE makeMonthlyPayment(IN customerID INT, IN paymentAmount DOUBLE, OUT success BIT)
+delimiter |
+CREATE EVENT monthly_tr
+ON SCHEDULE EVERY 1 MONTH
+DO 
 BEGIN
-    DECLARE monthlyFee DOUBLE;
-    DECLARE accountAmount DOUBLE;
-    DECLARE debtAmount DOUBLE;
-    */
-    -- Намираме месечната такса на клиента
-    /*SELECT monthly_fee INTO monthlyFee
-    FROM plans
-    WHERE planID = (
-        SELECT plan_id
-        FROM payments
-        WHERE customer_id = customerID
-        ORDER BY year DESC, month DESC
-        LIMIT 1
-    );*/
-    
-    /*SELECT plans.monthly_fee INTO monthlyFee
-	FROM plans
-	JOIN payments ON plans.planID = payments.plan_id
-	JOIN customers ON customers.customer_id = payments.customer_id
-	WHERE customers.customer_id = customerID
-	ORDER BY payments.year DESC, payments.month DESC
-	LIMIT 1;
+	CALL tr(1, 550, @res);
+end |
+delimiter ;
 
-    
-    
-    SELECT amount INTO accountAmount
-    FROM accounts
-    WHERE customer_id = customerID;
-    
-    IF accountAmount < monthlyFee THEN
-        SET success = 0;
-        SELECT CONCAT('Not enough funds. Required: ', monthlyFee) AS 'errorMessage';
-    END IF;
-    
-   
-    UPDATE accounts
-    SET amount = amount - monthlyFee
-    WHERE customer_id = customerID;
-    
-    
-    INSERT INTO payments (paymentAmount, month, year, dateOfPayment, customer_id, plan_id)
-    VALUES (paymentAmount, MONTH(NOW()), YEAR(NOW()), NOW(), customerID, (
-        SELECT plan_id
-        FROM payments
-        WHERE customer_id = customerID
-        ORDER BY year DESC, month DESC
-        LIMIT 1
-    ));
-    
-END //
-
-DELIMITER ;*/
+SELECT @res;
 
 
 #2
-/*DELIMITER $$
-CREATE PROCEDURE makePayments()
+DROP procedure if exists trans;
+delimiter |
+CREATE PROCEDURE trans()
 BEGIN
-    DECLARE customerID INT;
-    DECLARE paymentAmount DECIMAL(10,2);
-    DECLARE planID INT;
-    DECLARE monthlyFee DECIMAL(10,2);
-    DECLARE debt DECIMAL(10,2);
+    DECLARE done INT;
+    DECLARE tempPaymentAmount DOUBLE;
+    DECLARE tempMonth INT;
+    DECLARE tempYear YEAR;
+    DECLARE tempDateOfPayment DATETIME;
+    DECLARE tempCustomer_id INT;
+    DECLARE tempPlan_id INT;
+    DECLARE tempamount double;
     
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE tempcur CURSOR FOR 
-    SELECT customer_id, payment_amount, plan_id FROM payments;
+    DECLARE payment_cursor CURSOR FOR
+    SELECT payments.paymentamount, payments.month, payments.year, payments.dateofpayment,
+    payments.customer_id, payments.plan_id, accounts.amount 
+    FROM payments JOIN accounts ON accounts.customer_id = payments.customer_id 
+    JOIN plans on plans.planid = payments.plan_id
+    WHERE accounts.amount >= payments.paymentAmount;
     
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
     
     START TRANSACTION;
     
-    OPEN tempcur;
+    OPEN payment_cursor;
     
-    payment_loop: LOOP
-        FETCH tempcur INTO customerID, paymentAmount, planID;
-        
-        IF done THEN
+    payment_loop: loop
+    FETCH payment_cursor INTO tempPaymentAmount, tempMonth, tempYear, tempdateofpayment, tempCustomer_id, tempPlan_id, tempamount;
+    IF done THEN 
+		LEAVE payment_loop;
+    ELSE
+			UPDATE accounts
+			SET amount = amount - tempPaymentAmount 
+            WHERE customer_id = tempCustomer_id;
+            
+		IF(row_count() = 0) 
+        THEN 
+			INSERT INTO debtors
+            VALUES (tempCustomer_id, tempPlan_id, tempPaymentAmount);
+            ROLLBACK;
             LEAVE payment_loop;
-        END IF;
+		END IF;
         
-        SELECT monthly_fee INTO monthlyFee
-        FROM plans
-        WHERE planID = (
-            SELECT plan_id
-            FROM payments
-            WHERE customer_id = customerID
-        );
-        
-        IF paymentAmount >= monthlyFee THEN
-            UPDATE customers
-            SET balance = balance - monthlyFee
-            WHERE customer_id = customerID;
-        ELSE
-            SET debt = monthlyFee - paymentAmount;
-            INSERT INTO debts(customer_id, amount) VALUES (customerID, debt);
-        END IF;
-        
-        UPDATE payments
-        SET paid = 1
-        WHERE customer_id = customerID;
-    END LOOP;
+		INSERT INTO payments(paymentAmount, month, year, dateOfPayment, customer_id, plan_id)
+		VALUES(tempPaymentAmount, MONTH(NOW()), YEAR(NOW()), NOW(), tempCustomer_id, tempPlan_id);
+		END IF;
+
+    CLOSE payment_cursor;
     
-    CLOSE cur;
-    
-    COMMIT;
-    
-END $$
-DELIMITER ;*/
+    IF done THEN 
+        commit;
+	
+    END IF;
+        end loop;
+END
+|
+delimiter ;
+
+call trans();
 
 #3
 /*CREATE EVENT nameCalled
@@ -285,4 +286,3 @@ DELIMITER ;
 
 CALL getAllInformation('some name');
 */
-
