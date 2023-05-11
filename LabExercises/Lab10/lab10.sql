@@ -155,6 +155,65 @@ SELECT @res;
 
    
 #2
+DROP PROCEDURE IF EXISTS trans;
+DELIMITER |
+
+CREATE PROCEDURE trans()
+BEGIN
+    DECLARE done INT;
+    DECLARE tempPaymentAmount DOUBLE;
+    DECLARE tempMonth INT;
+    DECLARE tempYear YEAR;
+    DECLARE tempDateOfPayment DATETIME;
+    DECLARE tempCustomer_id INT;
+    DECLARE tempPlan_id INT;
+    DECLARE tempamount DOUBLE;
+
+    DECLARE payment_cursor CURSOR FOR
+    SELECT payments.paymentamount, payments.month, payments.year, payments.dateofpayment,
+    payments.customer_id, payments.plan_id, accounts.amount
+    FROM payments JOIN accounts ON accounts.customer_id = payments.customer_id
+    JOIN plans ON plans.planid = payments.plan_id
+    WHERE accounts.amount >= payments.paymentAmount;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    START TRANSACTION;
+
+    OPEN payment_cursor;
+
+    payment_loop: LOOP
+        FETCH payment_cursor INTO tempPaymentAmount, tempMonth, tempYear, tempdateofpayment, tempCustomer_id, tempPlan_id, tempamount;
+
+        IF done THEN
+            LEAVE payment_loop;
+        ELSE
+            UPDATE accounts
+            SET amount = amount - tempPaymentAmount
+            WHERE customer_id = tempCustomer_id;
+
+            IF ROW_COUNT() = 0 THEN
+                INSERT INTO debtors
+                VALUES (tempCustomer_id, tempPlan_id, tempPaymentAmount);
+                ROLLBACK;
+                LEAVE payment_loop;
+            END IF;
+
+            INSERT INTO payments(paymentAmount, month, year, dateOfPayment, customer_id, plan_id)
+            VALUES (tempPaymentAmount, MONTH(NOW()), YEAR(NOW()), NOW(), tempCustomer_id, tempPlan_id);
+        END IF;
+    END LOOP;
+
+    CLOSE payment_cursor;
+
+    IF done THEN
+        COMMIT;
+    END IF;
+END |
+
+DELIMITER ;
+
+CALL trans();
 
 
 
