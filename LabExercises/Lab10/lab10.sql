@@ -105,114 +105,57 @@ VALUES
 DELIMITER |
 CREATE PROCEDURE payment_fee(IN cl_id INT, IN amount_fee DOUBLE, OUT res BIT)
 BEGIN
-DECLARE customer_acc_amount DOUBLE;
-DECLARE payment_plan_id INT;
+    DECLARE customer_acc_amount DOUBLE;
+    DECLARE payment_plan_id INT;
 
-SELECT amount INTO customer_acc_amount
-FROM accounts
-WHERE customer_id = cl_id;
+    SELECT amount INTO customer_acc_amount
+    FROM accounts
+    WHERE customer_id = cl_id;
 
-IF (customer_acc_amount < amount_fee) THEN
-	SET res = 0;
-	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Not enough money for the payment";
-ELSE
-	SELECT plan_id INTO payment_plan_id
-	FROM payments
-	WHERE paymentAmount = amount_fee
-	AND customer_id = cl_id;
-    
-	START TRANSACTION;
-	INSERT INTO payments
-	VALUES (NULL, amount_fee, MONTH(NOW()), YEAR(NOW()), NOW(), cl_id, payment_plan_id);
+    IF (customer_acc_amount < amount_fee) THEN
+        SET res = 0;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Not enough money for the payment";
+    ELSE
+        SELECT plan_id INTO payment_plan_id
+        FROM payments
+        WHERE paymentAmount = amount_fee
+        AND customer_id = cl_id;
+
+        START TRANSACTION;
+        INSERT INTO payments
+        VALUES (NULL, amount_fee, MONTH(NOW()), YEAR(NOW()), NOW(), cl_id, payment_plan_id);
 
         UPDATE accounts
-	SET amount = amount - amount_fee
-	WHERE customer_id = cl_id;
+        SET amount = amount - amount_fee
+        WHERE customer_id = cl_id;
 
-	IF (ROW_COUNT() = 0) THEN
-		SELECT "Error";
-		SET res = 0;
-		ROLLBACK;
-		ELSE
-			SET res = 1;
-			COMMIT;
-	END IF;
-END IF;
+        IF (ROW_COUNT() = 0) THEN
+            SELECT "Error";
+            SET res = 0;
+            ROLLBACK;
+        ELSE
+            SET res = 1;
+            COMMIT;
+        END IF;
+    END IF;
 END |
 DELIMITER ;
-
 
 DELIMITER |
 CREATE EVENT monthlyEvent
 ON SCHEDULE EVERY 1 MONTH
 DO
 BEGIN
-CALL tr(1, 550, @res);
+    CALL tr(1, 550, @res);
 END |
 DELIMITER ;
 
 SELECT @res;
 
+
    
 #2
-DROP procedure if exists trans;
-delimiter |
-CREATE PROCEDURE trans()
-BEGIN
-    DECLARE done INT;
-    DECLARE tempPaymentAmount DOUBLE;
-    DECLARE tempMonth INT;
-    DECLARE tempYear YEAR;
-    DECLARE tempDateOfPayment DATETIME;
-    DECLARE tempCustomer_id INT;
-    DECLARE tempPlan_id INT;
-    DECLARE tempamount double;
-    
-    DECLARE payment_cursor CURSOR FOR
-    SELECT payments.paymentamount, payments.month, payments.year, payments.dateofpayment,
-    payments.customer_id, payments.plan_id, accounts.amount 
-    FROM payments JOIN accounts ON accounts.customer_id = payments.customer_id 
-    JOIN plans on plans.planid = payments.plan_id
-    WHERE accounts.amount >= payments.paymentAmount;
-    
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
-    
-    START TRANSACTION;
-    
-    OPEN payment_cursor;
-    
-    payment_loop: loop
-    FETCH payment_cursor INTO tempPaymentAmount, tempMonth, tempYear, tempdateofpayment, tempCustomer_id, tempPlan_id, tempamount;
-    IF done THEN 
-		LEAVE payment_loop;
-    ELSE
-		UPDATE accounts
-		SET amount = amount - tempPaymentAmount 
-                WHERE customer_id = tempCustomer_id;
-            
-		IF(row_count() = 0) THEN 
-			INSERT INTO debtors
-            		VALUES (tempCustomer_id, tempPlan_id, tempPaymentAmount);
-            		ROLLBACK;
-            		LEAVE payment_loop;
-			END IF;
-        
-		INSERT INTO payments(paymentAmount, month, year, dateOfPayment, customer_id, plan_id)
-		VALUES(tempPaymentAmount, MONTH(NOW()), YEAR(NOW()), NOW(), tempCustomer_id, tempPlan_id);
-		END IF;
 
-    CLOSE payment_cursor;
-    
-    IF done THEN 
-        COMMIT;
-	
-    END IF;
-        END loop;
-END
-|
-DELIMITER ;
-
-CALL trans();
 
 
 #3
