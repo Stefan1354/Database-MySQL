@@ -102,60 +102,58 @@ VALUES
 
 
 #1
-delimiter |
-create procedure payment_fee(IN cl_id INT, IN amount_fee double, OUT res BIT)
-begin
-    declare customer_acc_amount double;
-    declare payment_plan_id int;
-    
-    select amount into customer_acc_acount
-    from accounts
-    where customer_id = cl_id;
-    
-    if (customer_acc_amount < amount_fee)
-    then
-		set res = 0;
-		signal sqlstate '45000' set message_text = "Not enough money for the payment";
-	else
-		select plan_id into payment_plan_id
-		from payments
-		where paymentAmount = amount_fee
-		and customer_id = cl_id;
-        
-		start transaction;
-		            insert into payments
-		    	    values (null, amount_fee, month(now()), year(now()), now(), cl_id, payment_plan_id);
-
-			    update accounts
-			    set amount = amount - amount_fee
-			    where custmer_id = cl_id;
-
-			    if (row_count() = 0)
-			    then
-						select "Error";
-				set res = 0;
-				rollback;
-					else
-						set res = 1;
-						commit;
-						end if;
-		    	    end if;
-end;
-|
-delimiter ;
-
-delimiter |
-CREATE EVENT monthly_tr
-ON SCHEDULE EVERY 1 MONTH
-DO 
+DELIMITER |
+CREATE PROCEDURE payment_fee(IN cl_id INT, IN amount_fee DOUBLE, OUT res BIT)
 BEGIN
-	CALL tr(1, 550, @res);
-end |
-delimiter ;
+DECLARE customer_acc_amount DOUBLE;
+DECLARE payment_plan_id INT;
+
+SELECT amount INTO customer_acc_amount
+FROM accounts
+WHERE customer_id = cl_id;
+
+IF (customer_acc_amount < amount_fee) THEN
+	SET res = 0;
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Not enough money for the payment";
+ELSE
+	SELECT plan_id INTO payment_plan_id
+	FROM payments
+	WHERE paymentAmount = amount_fee
+	AND customer_id = cl_id;
+    
+	START TRANSACTION;
+	INSERT INTO payments
+	VALUES (NULL, amount_fee, MONTH(NOW()), YEAR(NOW()), NOW(), cl_id, payment_plan_id);
+
+        UPDATE accounts
+	SET amount = amount - amount_fee
+	WHERE customer_id = cl_id;
+
+	IF (ROW_COUNT() = 0) THEN
+		SELECT "Error";
+		SET res = 0;
+		ROLLBACK;
+		ELSE
+			SET res = 1;
+			COMMIT;
+	END IF;
+END IF;
+END |
+DELIMITER ;
+
+
+DELIMITER |
+CREATE EVENT monthlyEvent
+ON SCHEDULE EVERY 1 MONTH
+DO
+BEGIN
+CALL tr(1, 550, @res);
+END |
+DELIMITER ;
 
 SELECT @res;
 
-
+   
 #2
 DROP procedure if exists trans;
 delimiter |
@@ -188,17 +186,16 @@ BEGIN
     IF done THEN 
 		LEAVE payment_loop;
     ELSE
-			UPDATE accounts
-			SET amount = amount - tempPaymentAmount 
-            WHERE customer_id = tempCustomer_id;
+		UPDATE accounts
+		SET amount = amount - tempPaymentAmount 
+                WHERE customer_id = tempCustomer_id;
             
-		IF(row_count() = 0) 
-        THEN 
+		IF(row_count() = 0) THEN 
 			INSERT INTO debtors
-            VALUES (tempCustomer_id, tempPlan_id, tempPaymentAmount);
-            ROLLBACK;
-            LEAVE payment_loop;
-		END IF;
+            		VALUES (tempCustomer_id, tempPlan_id, tempPaymentAmount);
+            		ROLLBACK;
+            		LEAVE payment_loop;
+			END IF;
         
 		INSERT INTO payments(paymentAmount, month, year, dateOfPayment, customer_id, plan_id)
 		VALUES(tempPaymentAmount, MONTH(NOW()), YEAR(NOW()), NOW(), tempCustomer_id, tempPlan_id);
@@ -207,15 +204,16 @@ BEGIN
     CLOSE payment_cursor;
     
     IF done THEN 
-        commit;
+        COMMIT;
 	
     END IF;
-        end loop;
+        END loop;
 END
 |
-delimiter ;
+DELIMITER ;
 
-call trans();
+CALL trans();
+
 
 #3
 /*CREATE EVENT nameCalled
@@ -277,9 +275,9 @@ SELECT * FROM debtors;
 CREATE PROCEDURE getAllInformation(IN client_name VARCHAR(255))
 BEGIN
 	SELECT customers.customerID, customers.firstName, customers.middleName, customers.lastName, customers.email, customers.phone, customers.address,
-    payments.paymentID, payments.paymentAmount, payments.month, payments.year, payments.dateOfPayment
-    FROM customers JOIN payments ON
-    customers.customerID = payments.customer_id;
+    	payments.paymentID, payments.paymentAmount, payments.month, payments.year, payments.dateOfPayment
+    	FROM customers JOIN payments ON
+    	customers.customerID = payments.customer_id;
 END;
 $$
 DELIMITER ;
