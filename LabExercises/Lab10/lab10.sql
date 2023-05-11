@@ -153,7 +153,6 @@ DELIMITER ;
 SELECT @res;
 
 
-   
 #2
 DROP PROCEDURE IF EXISTS trans;
 DELIMITER |
@@ -216,14 +215,18 @@ DELIMITER ;
 CALL trans();
 
 
-
 #3
-/*CREATE EVENT nameCalled
+DELIMITER $$
+CREATE EVENT nameCalled
 ON SCHEDULE EVERY 1 MONTH
 STARTS '2023-05-28'
 DO
-CALL makeMonthlyPayment();
-*/
+BEGIN
+	CALL trans();
+END
+$$
+DELIMITER ;
+
 
 #4
 /*CREATE VIEW getNames AS
