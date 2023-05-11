@@ -105,7 +105,7 @@ VALUES
 delimiter |
 create procedure payment_fee(IN cl_id INT, IN amount_fee double, OUT res BIT)
 begin
-	declare customer_acc_amount double;
+    declare customer_acc_amount double;
     declare payment_plan_id int;
     
     select amount into customer_acc_acount
@@ -118,28 +118,28 @@ begin
 		signal sqlstate '45000' set message_text = "Not enough money for the payment";
 	else
 		select plan_id into payment_plan_id
-        from payments
-        where paymentAmount = amount_fee
-        and customer_id = cl_id;
+		from payments
+		where paymentAmount = amount_fee
+		and customer_id = cl_id;
         
-        start transaction;
-			insert into payments
-            values (null, amount_fee, month(now()), year(now()), now(), cl_id, payment_plan_id);
-            
-            update accounts
-            set amount = amount - amount_fee
-            where custmer_id = cl_id;
-            
-            if (row_count() = 0)
-            then
-				select "Error";
-                set res = 0;
-                rollback;
-			else
-				set res = 1;
-				commit;
-			end if;
-    end if;
+		start transaction;
+		            insert into payments
+		    	    values (null, amount_fee, month(now()), year(now()), now(), cl_id, payment_plan_id);
+
+			    update accounts
+			    set amount = amount - amount_fee
+			    where custmer_id = cl_id;
+
+			    if (row_count() = 0)
+			    then
+						select "Error";
+				set res = 0;
+				rollback;
+					else
+						set res = 1;
+						commit;
+						end if;
+		    	    end if;
 end;
 |
 delimiter ;
