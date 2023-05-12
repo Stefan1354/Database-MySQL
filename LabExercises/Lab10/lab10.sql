@@ -229,13 +229,13 @@ DELIMITER ;
 
 
 #4
-/*CREATE VIEW getNames AS
-SELECT customers.firstName, customers.middleName, customers.lastName, payments.dateOfPayment, plans.name, debtors.debt_amount
+CREATE VIEW getNames AS
+SELECT customers.firstName, customers.middleName, customers.lastName, payments.dateOfPayment, plans.name, debtors.debt_amount  /*add concat names*/
 FROM customers JOIN payments ON customers.customerID = payments.customer_id
 JOIN plans ON payments.plan_id = plans.planID
 JOIN debtors ON plans.planID = debtors.plan_id;
-*/
 
+/*
 #5
 /*DELIMITER $$
 CREATE TRIGGER addNames
