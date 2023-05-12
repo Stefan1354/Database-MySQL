@@ -114,7 +114,7 @@ BEGIN
 
     IF (customer_acc_amount < amount_fee) THEN
         SET res = 0;
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Not enough money for the payment";
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Not enough money for the payment';
     ELSE
         SELECT plan_id INTO payment_plan_id
         FROM payments
