@@ -46,6 +46,7 @@ CREATE TABLE `cableCompany`.`payments`(
 	UNIQUE KEY ( `customer_id`, `plan_id`,`month`,`year` )
 )ENGINE = InnoDB;
 
+
 CREATE TABLE `cableCompany`.`debtors`(
 	`customer_id` INT UNSIGNED NOT NULL ,
 	`plan_id` INT UNSIGNED NOT NULL ,
