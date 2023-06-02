@@ -13,6 +13,7 @@ CREATE TABLE `cableCompany`.`customers` (
 	PRIMARY KEY ( `customerID` )
 ) ENGINE = InnoDB;
 
+
 CREATE TABLE `cableCompany`.`accounts` (
 	`accountID` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY ,
 	`amount` DOUBLE NOT NULL ,
@@ -22,11 +23,13 @@ CREATE TABLE `cableCompany`.`accounts` (
 	ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
+
 CREATE TABLE `cableCompany`.`plans` (
 	`planID` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	`name` VARCHAR(32) NOT NULL,
 	`monthly_fee` DOUBLE NOT NULL
 ) ENGINE = InnoDB;
+
 
 CREATE TABLE `cableCompany`.`payments`(
 	`paymentID` INT AUTO_INCREMENT PRIMARY KEY ,
