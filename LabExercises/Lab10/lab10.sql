@@ -238,9 +238,9 @@ FROM customers JOIN payments ON customers.customerID = payments.customer_id
 JOIN plans ON payments.plan_id = plans.planID
 JOIN debtors ON plans.planID = debtors.plan_id;
 
-/*
+
 #5
-/*DELIMITER $$
+DELIMITER $$
 CREATE TRIGGER addNames
 AFTER INSERT ON plans
 FOR EACH ROW
@@ -251,7 +251,6 @@ BEGIN
 END;
 $$
 DELIMITER ;
-    */
 
 
 #6
