@@ -104,7 +104,6 @@ VALUES
     (5, 5, 75.00);
 
 
-
 #1
 DELIMITER |
 CREATE PROCEDURE payment_fee(IN cl_id INT, IN amount_fee DOUBLE, OUT res BIT)
