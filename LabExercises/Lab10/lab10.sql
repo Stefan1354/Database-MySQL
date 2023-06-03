@@ -254,7 +254,7 @@ DELIMITER ;
 
 
 #6
-/*DELIMITER $$
+DELIMITER $$
 CREATE TRIGGER check_account_balance 
 AFTER INSERT ON accounts 
 FOR EACH ROW 
@@ -275,7 +275,7 @@ INSERT INTO `accounts` (`amount`, `customer_id`)
 VALUES (140, 4);
 
 SELECT * FROM debtors;
-*/
+
 
 #7
 /*DELIMITER $$
