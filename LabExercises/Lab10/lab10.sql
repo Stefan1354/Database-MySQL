@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS `cableCompany`;
 CREATE DATABASE `cableCompany`;
 USE `cableCompany`;
 
+
 CREATE TABLE `cableCompany`.`customers` (
 	`customerID` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
 	`firstName` VARCHAR( 55 ) NOT NULL ,
