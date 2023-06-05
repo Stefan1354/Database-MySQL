@@ -291,4 +291,4 @@ END;
 $$
 DELIMITER ;
 
-CALL getAllInformation('Ivan ');
+CALL getAllInformation('John A. Doe');
