@@ -279,7 +279,7 @@ SELECT * FROM debtors;
 
 
 #7
-/*DELIMITER $$
+DELIMITER $$
 CREATE PROCEDURE getAllInformation(IN client_name VARCHAR(255))
 BEGIN
 	SELECT customers.customerID, customers.firstName, customers.middleName, customers.lastName, customers.email, customers.phone, customers.address,
@@ -291,4 +291,3 @@ $$
 DELIMITER ;
 
 CALL getAllInformation('some name');
-*/
