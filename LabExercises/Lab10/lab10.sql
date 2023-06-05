@@ -282,7 +282,8 @@ SELECT * FROM debtors;
 DELIMITER $$
 CREATE PROCEDURE getAllInformation(IN client_name VARCHAR(255))
 BEGIN
-	SELECT customers.customerID, customers.firstName, customers.middleName, customers.lastName, customers.email, customers.phone, customers.address,
+	SELECT customers.customerID, customers.firstName, customers.middleName, 
+	customers.lastName, customers.email, customers.phone, customers.address,
     	payments.paymentID, payments.paymentAmount, payments.month, payments.year, payments.dateOfPayment
     	FROM customers JOIN payments ON
     	customers.customerID = payments.customer_id;
@@ -290,4 +291,4 @@ END;
 $$
 DELIMITER ;
 
-CALL getAllInformation('some name');
+CALL getAllInformation('Ivan ');
