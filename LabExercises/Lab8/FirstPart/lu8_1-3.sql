@@ -282,11 +282,6 @@ INSERT INTO `school_sport_clubs`.`coach_work` (`coach_id`, `group_id`, `number_o
 INSERT INTO `school_sport_clubs`.`coach_work` (`coach_id`, `group_id`, `number_of_hours`, `date`) VALUES ('2', '3', '2', '2021-04-02 08:45:55');
 INSERT INTO `school_sport_clubs`.`coach_work` (`coach_id`, `group_id`, `number_of_hours`, `date`) VALUES ('2', '3', '2', '2021-04-09 08:45:55');
 
-/*IFNULL(1,2) - ?*/
-
-/*kursori
-coach_loop - label*/
-
 
 #1
 INSERT INTO salarypayments (coach_id, month, year, salaryAmount, dateOfPayment)
