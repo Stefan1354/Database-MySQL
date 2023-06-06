@@ -55,7 +55,8 @@ PRIMARY KEY(projection_id, cinema_id)
 );
 
 
-INSERT INTO films (year, country, length, name, producer) VALUES
+INSERT INTO films (year, country, length, name, producer) 
+VALUES
 ('2023-01-01', 'USA', 110, 'Final Destination 7', 'James Wong'),
 ('2022-02-14', 'USA', 120, 'A Quiet Place Part II', 'John Krasinski'),
 ('2021-05-20', 'USA', 140, 'Godzilla vs. Kong', 'Adam Wingard'),
@@ -63,10 +64,11 @@ INSERT INTO films (year, country, length, name, producer) VALUES
 
 
 INSERT INTO cinema (name, place, no_halls) 
-VALUES ('Arena Mladost', 'Sofia, Bulgaria', 5),
-       ('Cine Grand', 'Varna, Bulgaria', 4),
-       ('Cineplex', 'Plovdiv, Bulgaria', 6),
-       ('Cinema City', 'Burgas, Bulgaria', 3);
+VALUES 
+('Arena Mladost', 'Sofia, Bulgaria', 5),
+('Cine Grand', 'Varna, Bulgaria', 4),
+('Cineplex', 'Plovdiv, Bulgaria', 6),
+('Cinema City', 'Burgas, Bulgaria', 3);
 
 
 INSERT INTO halls (name, capacity, status, projection_id, films_id, cinema_id) VALUES
