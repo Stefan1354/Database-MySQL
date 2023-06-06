@@ -259,7 +259,7 @@ JOIN student_sport ss2 ON ss1.sportGroup_id = ss2.sportGroup_id AND ss1.student_
 JOIN students s2 ON s2.id = ss2.student_id AND sp.name = 'Football';
 
 #5
-CREATE VIEWS tables
+CREATE VIEW tables
 AS
 SELECT students.name, students.class, sportgroups.location, coaches.name
 FROM students JOIN student_sport ON students.id = student_sport.student_id
