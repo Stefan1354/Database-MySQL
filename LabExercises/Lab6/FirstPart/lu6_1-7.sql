@@ -105,14 +105,14 @@ VALUES 	(NULL, 'Sofia-Mladost 1', 'Monday', '08:00:00', 1, 1 ) ,
 		
 INSERT INTO student_sport 
 VALUES 	(1, 1),
-		(2, 1),
-		(3, 1),
-		(4, 2),
-		(5, 2),
-		(6, 2),
-		(1, 3),
-		(2, 3),
-		(3, 3);
+        (2, 1),
+	(3, 1),
+	(4, 2),
+	(5, 2),
+	(6, 2),
+	(1, 3),	
+	(2, 3),
+	(3, 3);
 		
 INSERT INTO `school_sport_clubs`.`taxespayments` 
 VALUES	(NULL, '1', '1', '200', '1', 2022, now()),
