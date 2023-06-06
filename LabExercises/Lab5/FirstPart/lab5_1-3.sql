@@ -55,7 +55,6 @@ PRIMARY KEY(projection_id, cinema_id)
 );
 
 
--- Запълване на таблицата films
 INSERT INTO films (year, country, length, name, producer) VALUES
 ('2023-01-01', 'USA', 110, 'Final Destination 7', 'James Wong'),
 ('2022-02-14', 'USA', 120, 'A Quiet Place Part II', 'John Krasinski'),
@@ -63,7 +62,6 @@ INSERT INTO films (year, country, length, name, producer) VALUES
 ('2021-11-24', 'USA', 130, 'Encanto', 'Byron Howard');
 
 
--- Запълване на таблицата cinema
 INSERT INTO cinema (name, place, no_halls) 
 VALUES ('Arena Mladost', 'Sofia, Bulgaria', 5),
        ('Cine Grand', 'Varna, Bulgaria', 4),
@@ -71,7 +69,6 @@ VALUES ('Arena Mladost', 'Sofia, Bulgaria', 5),
        ('Cinema City', 'Burgas, Bulgaria', 3);
 
 
--- Запълване на таблицата halls
 INSERT INTO halls (name, capacity, status, projection_id, films_id, cinema_id) VALUES
 ('Hall 1', 100, 'VIP', 1, 1, 1),
 ('Hall 2', 80, 'DELUXE', 2, 2, 2),
@@ -87,7 +84,6 @@ INSERT INTO halls (name, capacity, status, projection_id, films_id, cinema_id) V
 ('Hall 12', 70, '4D', 4, 4, 2);
 
 
--- Запълване на таблицата films_cinema
 INSERT INTO films_cinema (films_id, cinema_id) VALUES
 (1, 1),
 (1, 2),
@@ -100,7 +96,6 @@ INSERT INTO films_cinema (films_id, cinema_id) VALUES
 (4, 4);
 
 
--- Запълване на таблицата projection_cinema
 INSERT INTO projection_cinema (projection_id, cinema_id) VALUES
 (1, 1),
 (1, 2),
@@ -110,6 +105,7 @@ INSERT INTO projection_cinema (projection_id, cinema_id) VALUES
 (3, 4),
 (4, 1),
 (4, 4);
+
 
 #2
 SELECT cinema.name, halls.id, projection.duration
