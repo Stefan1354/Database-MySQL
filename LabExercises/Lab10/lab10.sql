@@ -185,7 +185,7 @@ BEGIN
     OPEN payment_cursor;
 
     payment_loop: LOOP
-        FETCH payment_cursor INTO tempPaymentAmount, tempMonth, tempYear, tempdateofpayment, tempCustomer_id, tempPlan_id, tempamount;
+        FETCH payment_cursor INTO tempPaymentAmount, tempMonth, tempYear, tempDateOfPayment, tempCustomer_id, tempPlan_id, tempamount;
 
         IF done THEN
             LEAVE payment_loop;
