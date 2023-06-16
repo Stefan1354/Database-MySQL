@@ -46,7 +46,7 @@ CREATE TABLE school_sport_clubs.student_sport(
 	CONSTRAINT FOREIGN KEY (sportGroup_id) 
 	REFERENCES sportGroups(id) ,
 	PRIMARY KEY(student_id,sportGroup_id)
-)Engine = Innodb;
+) Engine = Innodb;
 
 CREATE TABLE taxesPayments(
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -60,7 +60,7 @@ CREATE TABLE taxesPayments(
 	REFERENCES students(id),
 	CONSTRAINT FOREIGN KEY (group_id) 
 	REFERENCES sportgroups(id)
-)Engine = Innodb;
+) Engine = Innodb;
 
 CREATE TABLE salaryPayments(
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -72,7 +72,7 @@ CREATE TABLE salaryPayments(
 	CONSTRAINT FOREIGN KEY (coach_id) 
 	REFERENCES coaches(id),
 	UNIQUE KEY(`coach_id`,`month`,`year`)    
-)Engine = Innodb;
+) Engine = Innodb;
 		
 CREATE TABLE coach_work(
 	id INT auto_increment primary key,
@@ -83,7 +83,7 @@ CREATE TABLE coach_work(
 	isPayed BOOLEAN NOT NULL DEFAULT 0,
         foreign key (coach_id) references coaches(id),
         foreign key (group_id) references sportgroups(id)
-)Engine = Innodb;
+) Engine = Innodb;
 
 CREATE TABLE salarypayments_log(
 id INT auto_increment primary key,
@@ -99,7 +99,7 @@ new_salaryAmount DECIMAL,
 old_dateOfPayment DATETIME,
 new_dateOfPayment DATETIME,
 dateOfLog DATETIME
-)Engine = Innodb;
+) Engine = Innodb;
 
 INSERT INTO sports
 VALUES 	(NULL, 'Football') ,
