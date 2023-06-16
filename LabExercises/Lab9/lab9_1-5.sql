@@ -5,7 +5,7 @@ USE school_sport_clubs;
 CREATE TABLE school_sport_clubs.sports(
 	id INT AUTO_INCREMENT PRIMARY KEY ,
 	name VARCHAR(255) NOT NULL
-)Engine = Innodb;
+) Engine = Innodb;
 
 CREATE TABLE school_sport_clubs.coaches(
 	id INT AUTO_INCREMENT PRIMARY KEY ,
@@ -13,7 +13,7 @@ CREATE TABLE school_sport_clubs.coaches(
 	egn VARCHAR(10) NOT NULL UNIQUE CONSTRAINT EGN CHECK(CHAR_LENGTH(egn) = 10),
 	month_salary DECIMAL , 
 	hour_salary DECIMAL
-)Engine = Innodb;
+) Engine = Innodb;
 
 CREATE TABLE school_sport_clubs.students(
 	id INT AUTO_INCREMENT PRIMARY KEY ,
@@ -22,7 +22,7 @@ CREATE TABLE school_sport_clubs.students(
 	address VARCHAR(255) NOT NULL ,
 	phone VARCHAR(20) NULL DEFAULT NULL ,
 	class VARCHAR(10) NULL DEFAULT NULL   
-)Engine = Innodb;
+) Engine = Innodb;
 
 CREATE TABLE school_sport_clubs.sportGroups(
 	id INT AUTO_INCREMENT PRIMARY KEY ,
@@ -36,7 +36,7 @@ CREATE TABLE school_sport_clubs.sportGroups(
 	REFERENCES sports(id) ,
 	CONSTRAINT FOREIGN KEY (coach_id) 
 	REFERENCES coaches(id)
-)Engine = Innodb;
+) Engine = Innodb;
 
 CREATE TABLE school_sport_clubs.student_sport(
 	student_id INT NOT NULL , 
