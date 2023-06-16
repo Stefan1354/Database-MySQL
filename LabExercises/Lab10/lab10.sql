@@ -233,11 +233,18 @@ DELIMITER ;
 
 
 #4
+
+	
 CREATE VIEW getNames AS
-SELECT customers.firstName, customers.middleName, customers.lastName, payments.dateOfPayment, plans.name, debtors.debt_amount  /*add concat names*/
-FROM customers JOIN payments ON customers.customerID = payments.customer_id
+SELECT CONCAT(customers.firstName, ' ', customers.middleName, ' ', customers.lastName) AS fullName, 
+       payments.dateOfPayment, 
+       plans.name, 
+       debtors.debt_amount  
+FROM customers 
+JOIN payments ON customers.customerID = payments.customer_id
 JOIN plans ON payments.plan_id = plans.planID
 JOIN debtors ON plans.planID = debtors.plan_id;
+
 
 
 #5
