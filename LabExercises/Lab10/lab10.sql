@@ -170,10 +170,10 @@ BEGIN
     DECLARE tempDateOfPayment DATETIME;
     DECLARE tempCustomer_id INT;
     DECLARE tempPlan_id INT;
-    DECLARE tempamount DOUBLE;
+    DECLARE tempAmount DOUBLE;
 
     DECLARE payment_cursor CURSOR FOR
-    SELECT payments.paymentamount, payments.month, payments.year, payments.dateofpayment, payments.customer_id, payments.plan_id, accounts.amount
+    SELECT payments.paymentAmount, payments.month, payments.year, payments.dateOfPayment, payments.customer_id, payments.plan_id, accounts.amount
         FROM payments JOIN accounts ON accounts.customer_id = payments.customer_id
         JOIN plans ON plans.planid = payments.plan_id
         WHERE accounts.amount >= payments.paymentAmount;
@@ -185,7 +185,7 @@ BEGIN
     OPEN payment_cursor;
 
     payment_loop: LOOP
-        FETCH payment_cursor INTO tempPaymentAmount, tempMonth, tempYear, tempDateOfPayment, tempCustomer_id, tempPlan_id, tempamount;
+        FETCH payment_cursor INTO tempPaymentAmount, tempMonth, tempYear, tempDateOfPayment, tempCustomer_id, tempPlan_id, tempAmount;
 
         IF done THEN
             LEAVE payment_loop;
