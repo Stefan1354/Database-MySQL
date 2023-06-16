@@ -45,7 +45,7 @@ CREATE TABLE `cableCompany`.`payments`(
 	CONSTRAINT FOREIGN KEY ( `plan_id` ) 
 	REFERENCES `cableCompany`.`plans` ( `planID` ) ,
 	UNIQUE KEY ( `customer_id`, `plan_id`,`month`,`year` )
-)ENGINE = InnoDB;
+) ENGINE = InnoDB;
 
 
 CREATE TABLE `cableCompany`.`debtors`(
