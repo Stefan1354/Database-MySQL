@@ -173,11 +173,10 @@ BEGIN
     DECLARE tempamount DOUBLE;
 
     DECLARE payment_cursor CURSOR FOR
-    SELECT payments.paymentamount, payments.month, payments.year, payments.dateofpayment,
-    payments.customer_id, payments.plan_id, accounts.amount
-    FROM payments JOIN accounts ON accounts.customer_id = payments.customer_id
-    JOIN plans ON plans.planid = payments.plan_id
-    WHERE accounts.amount >= payments.paymentAmount;
+    SELECT payments.paymentamount, payments.month, payments.year, payments.dateofpayment, payments.customer_id, payments.plan_id, accounts.amount
+        FROM payments JOIN accounts ON accounts.customer_id = payments.customer_id
+        JOIN plans ON plans.planid = payments.plan_id
+        WHERE accounts.amount >= payments.paymentAmount;
 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 
