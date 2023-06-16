@@ -289,11 +289,12 @@ SELECT * FROM debtors;
 DELIMITER $$
 CREATE PROCEDURE getAllInformation(IN client_name VARCHAR(255))
 BEGIN
-	SELECT customers.customerID, customers.firstName, customers.middleName, 
-	customers.lastName, customers.email, customers.phone, customers.address,
-    	payments.paymentID, payments.paymentAmount, payments.month, payments.year, payments.dateOfPayment
-    	FROM customers JOIN payments ON
-    	customers.customerID = payments.customer_id;
+    SELECT customers.customerID, CONCAT(customers.firstName, ' ', customers.middleName, ' ', customers.lastName) AS fullName,
+    customers.email, customers.phone, customers.address,
+    payments.paymentID, payments.paymentAmount, payments.month, payments.year, payments.dateOfPayment
+    FROM customers
+    JOIN payments ON customers.customerID = payments.customer_id
+    WHERE CONCAT(customers.firstName, ' ', customers.middleName, ' ', customers.lastName) = client_name;
 END;
 $$
 DELIMITER ;
