@@ -215,7 +215,7 @@ END |
 
 DELIMITER ;
 
-CALL trans();
+CALL trans()
 
 
 #3
