@@ -247,7 +247,7 @@ VALUES	(NULL, '1', '1', '200', '1', 2022, now()),
 	(NULL, '1', '2', '200', '2', 2020, now()),
 	(NULL, '1', '2', '200', '3', 2020, now()),
 	(NULL, '4', '2', '200', '1', 2020, now()),
-	(NULL, '4', '2', '200', '2', 2020, now());
+(NULL, '4', '2', '200', '2', 2020, now());
 	
 #4
 SELECT s1.name AS student1, s2.name AS student2, sp.name AS sportName, sg.location, sg.dayOfWeek, sg.hourOfTraining
