@@ -3,15 +3,15 @@ CREATE DATABASE school_sport_clubs;
 USE school_sport_clubs;
 
 CREATE TABLE school_sport_clubs.sports(
-	id INT AUTO_INCREMENT PRIMARY KEY ,
+	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL
 )Engine = Innodb;
 
 CREATE TABLE school_sport_clubs.coaches(
-	id INT AUTO_INCREMENT PRIMARY KEY ,
-	name VARCHAR(255) NOT NULL ,
-	egn VARCHAR(10) NOT NULL UNIQUE ,
-	month_salary DECIMAL , 
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL,
+	egn VARCHAR(10) NOT NULL UNIQUE,
+	month_salary DECIMAL, 
 	hour_salary DECIMAL
 )Engine = Innodb;
 
