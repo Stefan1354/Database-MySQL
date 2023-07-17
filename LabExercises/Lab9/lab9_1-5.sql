@@ -17,7 +17,7 @@ CREATE TABLE school_sport_clubs.coaches(
 
 CREATE TABLE school_sport_clubs.students(
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(255) NOT NULL ,
+	name VARCHAR(255) NOT NULL,
 	egn VARCHAR(10) NOT NULL UNIQUE ,
 	address VARCHAR(255) NOT NULL ,
 	phone VARCHAR(20) NULL DEFAULT NULL ,
