@@ -11,7 +11,7 @@ CREATE TABLE school_sport_clubs.coaches(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	egn VARCHAR(10) NOT NULL UNIQUE CONSTRAINT EGN CHECK(CHAR_LENGTH(egn) = 10),
-	month_salary DECIMAL , 
+	month_salary DECIMAL, 
 	hour_salary DECIMAL
 ) Engine = Innodb;
 
