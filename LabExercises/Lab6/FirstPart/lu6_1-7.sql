@@ -8,7 +8,7 @@ CREATE TABLE school_sport_clubs.sports(
 );
 
 CREATE TABLE school_sport_clubs.coaches(
-	id INT AUTO_INCREMENT PRIMARY KEY ,
+	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL ,
 	egn VARCHAR(10) NOT NULL UNIQUE
 );
