@@ -25,7 +25,7 @@ CREATE TABLE school_sport_clubs.students(
 ) Engine = Innodb;
 
 CREATE TABLE school_sport_clubs.sportGroups(
-	id INT AUTO_INCREMENT PRIMARY KEY ,
+	id INT AUTO_INCREMENT PRIMARY KEY,
 	location VARCHAR(255) NOT NULL ,
 	dayOfWeek ENUM('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') ,
 	hourOfTraining TIME NOT NULL ,
